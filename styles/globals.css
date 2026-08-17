@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Colors */
+
+  --color-primary-50: rgb(228 233 255);
+  --color-primary-100: rgb(219 226 255);
+  --color-primary-200: rgb(201 211 255);
+  --color-primary-300: rgb(183 197 255);
+  --color-primary-400: rgb(164 182 255);
+  --color-primary-500: rgb(146 167 255);
+  --color-primary-600: rgb(128 153 255);
+  --color-primary-700: rgb(110 138 255);
+  --color-primary-800: rgb(92 124 255);
+  --color-primary-900: rgb(74 109 255);
+
+  --color-secondary-50: rgb(223 223 229);
+  --color-secondary-100: rgb(212 213 221);
+  --color-secondary-200: rgb(191 192 203);
+  --color-secondary-300: rgb(170 171 186);
+  --color-secondary-400: rgb(148 150 169);
+  --color-secondary-500: rgb(127 129 152);
+  --color-secondary-600: rgb(106 108 135);
+  --color-secondary-700: rgb(85 87 117);
+  --color-secondary-800: rgb(63 66 100);
+  --color-secondary-900: rgb(42 45 83);
+
+  --color-success: rgb(0 192 115);
+  --color-warning: rgb(255 153 0);
+  --color-error: rgb(255 71 87);
+
+  --color-red-300: rgb(252 165 165);
+  --color-red-500: rgb(239 68 68);
+
+  /* Fonts */
+
+  --font-sans: var(--font-vazir);
+
+  /* Shadows */
+
+  --shadow-input-focus: 0 12px 24px -8px rgb(183 197 255);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@utility textField__input {
+  @apply w-full px-4 py-3 rounded-xl bg-gray-100 border border-gray-100 outline-none text-secondary-900 transition-all duration-200 ease-in-out hover:border-primary-300 focus:border-primary-300 focus:bg-white focus:shadow-input-focus;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@utility btn {
+  @apply px-2 py-1 font-bold rounded-2xl transition-all duration-300;
 }
 
+@utility btn--primary {
+  @apply px-4 py-3 bg-primary-900 text-white hover:bg-primary-800 shadow-lg;
+}
+
+@utility table__th {
+  @apply p-3 pr-8 text-right font-medium border-b-2 border-b-gray-500;
+}
+
+@utility table__td {
+  @apply p-3 pr-8 text-right border-b border-b-gray-300;
+}
+
+@utility badge {
+  @apply px-3 py-1 rounded-xl whitespace-nowrap;
+}
+
+@utility badge--primary {
+  @apply bg-primary-900 text-white;
+}
+
+@utility badge--secondary {
+  @apply bg-secondary-600 text-white;
+}
+
+@utility badge--success {
+  @apply bg-green-600 text-white;
+}
+
+@utility badge--error {
+  @apply bg-rose-600 text-white;
+}
+
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  user-select: none;
+  font-family: var(--font-vazir);
+  background-color: rgb(244 245 247);
 }
