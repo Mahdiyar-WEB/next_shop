@@ -19,7 +19,17 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "components/*": ["./components/*"],
+      "styles/*": ["./styles/*"],
+      "public/*": ["./public/*"],
+      "hooks/*": ["./hooks/*"],
+      "utils/*": ["./utils/*"],
+      "api/*": ["./api/*"],
+      "constants/*": ["./constants/*"],
+      "context/*": ["./context/*"],
+      "lib/*": ["./lib/*"],
+      "providers/*": ["./providers/*"],
+      "seed/*": ["./seed/*"]
     }
   },
   "include": [
