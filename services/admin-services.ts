@@ -1,10 +1,12 @@
 import { apiClient } from "./client";
+
 export type Pagination = {
   page: number;
   limit: number;
   totalItems: number;
   totalPages: number;
 };
+
 export type AdminResource =
   | "categories"
   | "products"
@@ -13,6 +15,7 @@ export type AdminResource =
   | "users"
   | "posts"
   | "comments";
+  
 export const adminServices = {
   list: <T>(resource: AdminResource, query = "") =>
     apiClient.get<Record<string, T[] | Pagination>>(

@@ -24,7 +24,7 @@
       "public/*": ["./public/*"],
       "hooks/*": ["./hooks/*"],
       "utils/*": ["./utils/*"],
-      "api/*": ["./api/*"],
+      "services/*": ["./services/*"],
       "constants/*": ["./constants/*"],
       "context/*": ["./context/*"],
       "lib/*": ["./lib/*"],
