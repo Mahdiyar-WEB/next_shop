@@ -1,0 +1,2 @@
+import { adminServices } from "./admin-services"; import { apiClient } from "./client";
+export const categoryServices = { getAll: (query = "") => apiClient.get<{ categories: unknown[] }>(`/api/categories${query ? `?${query}` : ""}`), create: (data: unknown) => adminServices.create("categories", data), update: (id: string, data: unknown) => adminServices.update("categories", id, data), remove: (id: string) => adminServices.remove("categories", id) };

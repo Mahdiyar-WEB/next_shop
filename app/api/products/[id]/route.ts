@@ -1,0 +1,2 @@
+import { connectToDatabase } from "lib/db"; import { Product } from "lib/models"; import { ApiError, fail, objectId, ok } from "lib/api";
+export async function GET(_request: Request, { params }: { params: Promise<{ id: string }> }) { try { await connectToDatabase(); const product = await Product.findById(objectId((await params).id)).populate("category", "title englishTitle icon"); if (!product) throw new ApiError(404, "محصول یافت نشد"); return ok({ product }); } catch (error) { return fail(error); } }

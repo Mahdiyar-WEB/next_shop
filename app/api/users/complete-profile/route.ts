@@ -1,0 +1,3 @@
+import { body, currentUser, fail, ok, ApiError } from "lib/api";
+import { User } from "lib/models";
+export async function POST(request: Request) { try { const user = await currentUser(request as never); const { name, email } = await body<{ name?: string; email?: string }>(request as never); if (!name || name.trim().length < 3 || !email?.includes("@")) throw new ApiError(400, "نام و ایمیل معتبر الزامی هستند"); if (await User.exists({ email: email.toLowerCase(), _id: { $ne: user._id } })) throw new ApiError(409, "این ایمیل قبلاً ثبت شده است"); user.set({ name: name.trim(), email: email.toLowerCase(), isActive: true }); await user.save(); return ok({ message: "پروفایل تکمیل شد", user }); } catch (error) { return fail(error); } }

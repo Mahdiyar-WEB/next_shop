@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import vazirFont from "constants/localFont";
 import "styles/globals.css";
 import { ReactNode } from "react";
+import { QueryProvider } from "providers/query-provider";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,7 +12,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fa" className={`${vazirFont.variable} font-sans`}>
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full"><QueryProvider>{children}</QueryProvider></body>
     </html>
   );
 }
