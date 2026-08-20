@@ -29,7 +29,7 @@
       "context/*": ["./context/*"],
       "lib/*": ["./lib/*"],
       "providers/*": ["./providers/*"],
-      "seed/*": ["./seed/*"]
+      "theme/*": ["./theme/*"]
     }
   },
   "include": [
