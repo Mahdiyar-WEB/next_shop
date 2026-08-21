@@ -95,7 +95,7 @@ const Auth = () => {
                 </p>
 
                 {/* Features */}
-                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs text-white/85 sm:text-sm">
+                <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2 text-xs font-semibold text-white/85 sm:text-sm">
                   <span>✓ ارسال سریع</span>
                   <span>✓ ضمانت اصالت</span>
                   <span>✓ پرداخت امن</span>
@@ -187,7 +187,7 @@ const Auth = () => {
             </p>
 
             {/* Features */}
-            <div className="mt-10 flex gap-8 text-sm text-white/90">
+            <div className="mt-10 flex gap-8 font-semibold text-sm text-white/90">
               <span>✓ ارسال سریع</span>
               <span>✓ ضمانت اصالت</span>
               <span>✓ پرداخت امن</span>
