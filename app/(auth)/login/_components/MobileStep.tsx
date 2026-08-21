@@ -10,14 +10,14 @@ type MobileStepProps = {
   control: Control<RegisterFormValues>;
   error?: string;
   handlePhoneStep: () => void;
-  isSubmitting: boolean;
+  isOtpLoading: boolean;
 };
 
 const MobileStep = ({
   control,
   error,
   handlePhoneStep,
-  isSubmitting,
+  isOtpLoading,
 }: MobileStepProps) => {
   return (
     <Box>
@@ -76,7 +76,7 @@ const MobileStep = ({
           size="large"
           variant="contained"
           onClick={handlePhoneStep}
-          disabled={isSubmitting}
+          loading={isOtpLoading}
         >
           دریافت کد تأیید
         </Button>

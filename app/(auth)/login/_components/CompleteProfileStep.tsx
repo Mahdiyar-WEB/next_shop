@@ -7,13 +7,13 @@ import Textfield from "components/Textfield";
 type UserInfoStepProps = {
   control: Control<RegisterFormValues>;
   errors: FieldErrors<RegisterFormValues>;
-  isSubmitting: boolean;
+  isCompletingProfile: boolean;
 };
 
 const CompleteProfileStep = ({
   control,
   errors,
-  isSubmitting,
+  isCompletingProfile,
 }: UserInfoStepProps) => {
   return (
     <Box>
@@ -106,9 +106,9 @@ const CompleteProfileStep = ({
           type="submit"
           variant="contained"
           size="large"
-          disabled={isSubmitting}
+          loading={isCompletingProfile}
         >
-          {isSubmitting ? "در حال ثبت..." : "ثبت نام"}
+          ثبت نام
         </Button>
       </Box>
     </Box>

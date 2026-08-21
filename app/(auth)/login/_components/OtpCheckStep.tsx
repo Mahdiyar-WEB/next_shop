@@ -13,7 +13,7 @@ type OtpStepProps = {
   onResend: () => void;
   handleWrongPhone: () => void;
   handleOtpStep: () => void;
-  isSubmitting: boolean;
+  isVerifyLoading: boolean;
 };
 
 const OtpCheckStep = ({
@@ -23,7 +23,7 @@ const OtpCheckStep = ({
   onResend,
   handleOtpStep,
   handleWrongPhone,
-  isSubmitting,
+  isVerifyLoading,
 }: OtpStepProps) => {
   const formatCountdown = (seconds: number) => {
     const minutes = Math.floor(seconds / 60);
@@ -106,7 +106,7 @@ const OtpCheckStep = ({
             fullWidth
             variant="contained"
             onClick={handleOtpStep}
-            disabled={isSubmitting}
+            loading={isVerifyLoading}
           >
             تأیید کد
           </Button>
