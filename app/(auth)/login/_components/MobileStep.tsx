@@ -1,12 +1,6 @@
 import { Control, Controller } from "react-hook-form";
 import { RegisterFormValues } from "./AuthForm";
-import {
-  Box,
-  Button,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import toPersianDigits from "utils/toPersianDigits";
 import Textfield from "components/Textfield";
 
@@ -27,7 +21,7 @@ const MobileStep = ({
 }: MobileStepProps) => {
   return (
     <Box>
-      <Typography variant="body1" className="mb-3! font-bold">
+      <Typography variant="body2" className="mb-4! font-bold">
         شماره موبایل خود را وارد کنید
       </Typography>
 
@@ -45,6 +39,7 @@ const MobileStep = ({
           render={({ field }) => (
             <Textfield
               {...field}
+              autoFocus
               fullWidth
               label="شماره موبایل"
               dir="ltr"
