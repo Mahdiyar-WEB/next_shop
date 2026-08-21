@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import toEnglishDigits from "utils/toEnglishDigits";
 import toPersianDigits from "utils/toPersianDigits";
 
@@ -32,29 +32,15 @@ const OtpInput = ({
   const createOtpArray = (value: string) => {
     const normalizedValue = normalizeOtp(value);
 
-    return Array.from({ length }, (_, index) => normalizedValue[index] ?? "");
+    return Array.from(
+      { length },
+      (_, index) => normalizedValue[index] ?? "",
+    );
   };
 
-  const [otp, setOtp] = useState<string[]>(() => createOtpArray(value));
-
-  // Sync external value with internal state
-  useEffect(() => {
-    const normalizedValue = normalizeOtp(value);
-
-    setOtp((currentOtp) => {
-      const currentValue = currentOtp.join("");
-
-      if (currentValue === normalizedValue) {
-        return currentOtp;
-      }
-
-      return createOtpArray(normalizedValue);
-    });
-  }, [value, length]);
+  const otp = createOtpArray(value);
 
   const updateOtp = (nextOtp: string[]) => {
-    setOtp(nextOtp);
-
     onChange?.(nextOtp.join(""));
   };
 
@@ -84,7 +70,6 @@ const OtpInput = ({
 
     const nextOtp = [...otp];
 
-    // اگر خانه مقدار دارد، فقط خودش پاک شود
     if (otp[index]) {
       nextOtp[index] = "";
 
@@ -93,7 +78,6 @@ const OtpInput = ({
       return;
     }
 
-    // اگر خانه خالی است، برو خانه قبلی
     if (index > 0) {
       nextOtp[index - 1] = "";
 
@@ -111,7 +95,7 @@ const OtpInput = ({
 
     const pastedValue = toEnglishDigits(event.clipboardData.getData("text"))
       .replace(/\D/g, "")
-      .slice(0, length);
+      .slice(0, length - index);
 
     if (!pastedValue) return;
 
@@ -125,7 +109,10 @@ const OtpInput = ({
 
     updateOtp(nextOtp);
 
-    const nextIndex = Math.min(index + pastedValue.length, length - 1);
+    const nextIndex = Math.min(
+      index + pastedValue.length,
+      length - 1,
+    );
 
     inputRefs.current[nextIndex]?.focus();
   };
@@ -136,7 +123,6 @@ const OtpInput = ({
 
   return (
     <div className="w-full">
-      {/* OTP Inputs */}
       <div dir="ltr" className="flex w-full gap-2 sm:gap-3">
         {Array.from({ length }, (_, index) => (
           <input
@@ -152,60 +138,65 @@ const OtpInput = ({
             value={toPersianDigits(otp[index] ?? "")}
             placeholder="-"
             disabled={disabled}
-            onChange={(event) => changeOtpHandler(event.target.value, index)}
-            onKeyDown={(event) => keyDownHandler(event, index)}
-            onPaste={(event) => pasteHandler(event, index)}
+            onChange={(event) =>
+              changeOtpHandler(event.target.value, index)
+            }
+            onKeyDown={(event) =>
+              keyDownHandler(event, index)
+            }
+            onPaste={(event) =>
+              pasteHandler(event, index)
+            }
             onBlur={blurHandler}
             onFocus={(event) => event.target.select()}
             className={`
-                h-11
-                min-w-0
-                flex-1
-                rounded-lg
-                border
-                bg-white
-                text-center
-                text-base
-                font-semibold
-                outline-none
-                transition-all
-                duration-200
+              h-11
+              min-w-0
+              flex-1
+              rounded-lg
+              border
+              bg-white
+              text-center
+              text-base
+              font-semibold
+              outline-none
+              transition-all
+              duration-200
 
-                sm:h-12
-                sm:text-lg
+              sm:h-12
+              sm:text-lg
 
-                ${
-                  error
-                    ? `
-                      border-red-500
-                      text-red-600
-                      placeholder:text-red-300
+              ${
+                error
+                  ? `
+                    border-red-500
+                    text-red-600
+                    placeholder:text-red-300
 
-                      focus:border-red-500
-                      focus:ring-2
-                      focus:ring-red-500/15
-                    `
-                    : `
-                      border-gray-300
-                      text-gray-900
-                      placeholder:text-gray-400
+                    focus:border-red-500
+                    focus:ring-2
+                    focus:ring-red-500/15
+                  `
+                  : `
+                    border-gray-300
+                    text-gray-900
+                    placeholder:text-gray-400
 
-                      hover:border-gray-500
-                      focus:border-primary-800
-                      focus:ring-2
-                      focus:ring-primary-800/15
-                    `
-                }
+                    hover:border-gray-500
+                    focus:border-primary-800
+                    focus:ring-2
+                    focus:ring-primary-800/15
+                  `
+              }
 
-                disabled:cursor-not-allowed
-                disabled:bg-gray-100
-                disabled:opacity-60
-              `}
+              disabled:cursor-not-allowed
+              disabled:bg-gray-100
+              disabled:opacity-60
+            `}
           />
         ))}
       </div>
 
-      {/* Helper / Error */}
       {helperText && (
         <div
           dir="rtl"
@@ -224,7 +215,6 @@ const OtpInput = ({
           `}
         >
           {error && <span className="font-bold">*</span>}
-
           <span>{helperText}</span>
         </div>
       )}
