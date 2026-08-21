@@ -38,7 +38,7 @@
 
   /* Shadows */
 
-  --shadow-input-focus: 0 12px 24px -8px rgb(183 197 255);
+  --shadow-input-focus: 0 0 0 3px rgb(183 197 255 / 0.25);
 }
 
 
