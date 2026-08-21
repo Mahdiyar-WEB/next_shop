@@ -24,15 +24,15 @@ export type RegisterFormValues = {
 
 const steps = [
   {
-    label: "شماره موبایل",
+    label: "۱. شماره موبایل",
     icon: <PhoneAndroidOutlined />,
   },
   {
-    label: "تأیید شماره",
+    label: "۲. تأیید شماره",
     icon: <SmsOutlined />,
   },
   {
-    label: "تکمیل اطلاعات",
+    label: "۳. تکمیل اطلاعات",
     icon: <PersonOutlineOutlined />,
   },
 ];
@@ -50,7 +50,7 @@ export default function AuthForm() {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<RegisterFormValues>({
-    mode: "onTouched",
+    mode: "onChange",
     defaultValues: {
       phone: "",
       otp: "",
@@ -142,21 +142,6 @@ export default function AuthForm() {
     setActiveStep(0);
   };
 
-  /*
-   * ----------------------------------------
-   * Back
-   * ----------------------------------------
-   */
-
-  const handleBack = () => {
-    setServerError("");
-
-    if (activeStep === 1) {
-      setValue("otp", "");
-    }
-
-    setActiveStep((prev) => Math.max(prev - 1, 0));
-  };
 
   /*
    * ----------------------------------------
@@ -216,7 +201,6 @@ export default function AuthForm() {
       case 2:
         return (
           <CompleteProfileStep
-            handleBack={handleBack}
             isSubmitting={isSubmitting}
             control={control}
             errors={errors}
@@ -236,8 +220,8 @@ export default function AuthForm() {
         w-full
         items-center
         justify-center
-        p-4
         sm:p-6
+        bg-white
       "
     >
       <Box
@@ -251,11 +235,12 @@ export default function AuthForm() {
           overflow-hidden
           rounded-2xl
           border
-          border-secondary-200
+          border-secondary-50/50
           bg-white
-          p-4
+          px-4
+          py-8
           shadow-lg
-          sm:p-5
+          sm:px-5
           max-h-[calc(100dvh-2rem)]
           sm:max-h-[calc(100dvh-3rem)]
         "
@@ -270,7 +255,7 @@ export default function AuthForm() {
           </Typography>
 
           <Typography
-            variant="body2"
+            variant="subtitle2"
             sx={{ color: "text.secondary" }}
             className="mt-2!"
           >
@@ -308,23 +293,20 @@ export default function AuthForm() {
                   <div
                     className={`
                       flex
-                      size-10
+                      p-2
                       items-center
                       justify-center
                       rounded-full
                       border-2
                       transition-all
                       duration-300
-
-                      sm:size-11
-
+                      
                       ${
                         isCompleted || isActive
                           ? "border-primary-800 bg-primary-800 text-white"
                           : "border-gray-300 bg-white text-gray-400"
                       }
 
-                      ${isActive ? "scale-110" : ""}
                     `}
                   >
                     {step.icon}
@@ -338,8 +320,7 @@ export default function AuthForm() {
                       font-medium
                       transition-colors
                       duration-300
-
-                      sm:text-sm
+                      sm:text-xs
 
                       ${
                         isCompleted || isActive
@@ -401,9 +382,9 @@ export default function AuthForm() {
           <div
             key={activeStep}
             className="
-              animate-in
-              fade-in
-              slide-in-from-left-4
+              animate-in!
+              fade-in!
+              slide-in-from-left-4!
               duration-300
             "
           >
