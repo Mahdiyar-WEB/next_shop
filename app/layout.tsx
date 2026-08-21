@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="fa" className={`${vazirFont.variable} font-sans`}>
+    <html lang="fa" className={`${vazirFont.variable} font-sans`} dir="rtl">
       <body className="min-h-full">
         <QueryProvider>
           <AppRouterCacheProvider>
