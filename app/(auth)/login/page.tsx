@@ -1,9 +1,13 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import AuthForm from "./_components/AuthForm";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "احراز هویت",
+  description:"احراز هویت در اپلیکیشن ویرا"
+};
 
 const Auth = () => {
   return (
