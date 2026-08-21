@@ -2,9 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
-import { Alert, Box, Typography } from "@mui/material";
-
+import { Box, Typography } from "@mui/material";
 import {
   PhoneAndroidOutlined,
   SmsOutlined,
@@ -13,6 +11,10 @@ import {
 import MobileStep from "./MobileStep";
 import OtpCheckStep from "./OtpCheckStep";
 import CompleteProfileStep from "./CompleteProfileStep";
+import { useRequestOtp, useVerifyOtp } from "hooks/use-auth";
+import toast from "react-hot-toast";
+import { useCompleteProfile } from "hooks/useCompleteProfile";
+import { useRouter } from "next/navigation";
 
 export type RegisterFormValues = {
   phone: string;
@@ -40,7 +42,11 @@ const steps = [
 export default function AuthForm() {
   const [activeStep, setActiveStep] = useState(0);
   const [resendCountdown, setResendCountdown] = useState(0);
-  const [serverError, setServerError] = useState("");
+  const router = useRouter();
+  const { mutate: sendOtp, isPending: isOtpLoading } = useRequestOtp();
+  const { mutate: verifyOtp, isPending: isVerifyLoading } = useVerifyOtp();
+  const { mutate: completeProfile, isPending: isCompletingProfile } =
+    useCompleteProfile();
 
   const {
     control,
@@ -48,7 +54,7 @@ export default function AuthForm() {
     trigger,
     getValues,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<RegisterFormValues>({
     mode: "onChange",
     defaultValues: {
@@ -81,15 +87,17 @@ export default function AuthForm() {
     const isValid = await trigger("phone");
 
     if (!isValid) return;
-
-    setServerError("");
-
     const phone = getValues("phone");
-
-    console.log("Send OTP to:", `+98${phone}`);
-
-    setResendCountdown(90);
-    setActiveStep(1);
+    sendOtp(0 + phone, {
+      onSuccess: (data) => {
+        toast.success(data.message);
+        setResendCountdown(90);
+        setActiveStep(1);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
   };
 
   /*
@@ -103,13 +111,21 @@ export default function AuthForm() {
 
     if (!isValid) return;
 
-    setServerError("");
-
     const otp = getValues("otp");
+    const phone = getValues("phone");
 
-    console.log("Verify OTP:", otp);
-
-    setActiveStep(2);
+    verifyOtp(
+      { phoneNumber: 0 + phone, code: otp },
+      {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          setActiveStep(2);
+        },
+        onError: (error) => {
+          toast.error(error.message);
+        },
+      },
+    );
   };
 
   /*
@@ -123,10 +139,16 @@ export default function AuthForm() {
 
     const phone = getValues("phone");
 
-    console.log("Resend OTP to:", `+98${phone}`);
-
-    setValue("otp", "");
-    setResendCountdown(90);
+    sendOtp(0 + phone, {
+      onSuccess: (data) => {
+        toast.success(data.message);
+        setValue("otp", "");
+        setResendCountdown(90);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
   };
 
   /*
@@ -138,10 +160,8 @@ export default function AuthForm() {
   const handleWrongPhone = () => {
     setValue("otp", "");
     setResendCountdown(0);
-    setServerError("");
     setActiveStep(0);
   };
-
 
   /*
    * ----------------------------------------
@@ -150,20 +170,19 @@ export default function AuthForm() {
    */
 
   const onSubmit = async (data: RegisterFormValues) => {
-    try {
-      setServerError("");
-
-      console.log("Register:", {
-        ...data,
-        phone: `+98${data.phone}`,
-      });
-
-      /*
-       * API register
-       */
-    } catch {
-      setServerError("ثبت نام انجام نشد. دوباره تلاش کنید.");
-    }
+    const name = data.firstName + " " + data.lastName;
+    const payload = { name, email: data.email };
+    completeProfile(payload, {
+      onSuccess: (data) => {
+        toast.success(data.message);
+        setTimeout(() => {
+          router.push("/");
+        }, 1500);
+      },
+      onError: (error) => {
+        toast.error(error.message);
+      },
+    });
   };
 
   /*
@@ -178,7 +197,7 @@ export default function AuthForm() {
         return (
           <MobileStep
             handlePhoneStep={handlePhoneStep}
-            isSubmitting={isSubmitting}
+            isOtpLoading={isOtpLoading}
             control={control}
             error={errors.phone?.message}
           />
@@ -189,7 +208,7 @@ export default function AuthForm() {
           <OtpCheckStep
             handleOtpStep={handleOtpStep}
             handleWrongPhone={handleWrongPhone}
-            isSubmitting={isSubmitting}
+            isVerifyLoading={isVerifyLoading}
             control={control}
             error={errors.otp?.message}
             phone={getValues("phone")}
@@ -201,7 +220,7 @@ export default function AuthForm() {
       case 2:
         return (
           <CompleteProfileStep
-            isSubmitting={isSubmitting}
+            isCompletingProfile={isCompletingProfile}
             control={control}
             errors={errors}
           />
@@ -373,12 +392,6 @@ export default function AuthForm() {
             px-0.5
           "
         >
-          {serverError && (
-            <Alert severity="error" className="mb-5">
-              {serverError}
-            </Alert>
-          )}
-
           <div
             key={activeStep}
             className="
