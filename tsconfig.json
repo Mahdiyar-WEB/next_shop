@@ -29,6 +29,8 @@
       "context/*": ["./context/*"],
       "lib/*": ["./lib/*"],
       "providers/*": ["./providers/*"],
+      "stores/*": ["./stores/*"],
+      "types/*": ["./types/*"],
       "theme/*": ["./theme/*"]
     }
   },
