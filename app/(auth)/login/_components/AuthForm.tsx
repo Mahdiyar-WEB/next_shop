@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Box, Typography } from "@mui/material";
@@ -11,10 +10,11 @@ import {
 import MobileStep from "./MobileStep";
 import OtpCheckStep from "./OtpCheckStep";
 import CompleteProfileStep from "./CompleteProfileStep";
-import { useRequestOtp, useVerifyOtp } from "hooks/use-auth";
+import { useCurrentUser, useRequestOtp, useVerifyOtp } from "hooks/use-auth";
 import toast from "react-hot-toast";
 import { useCompleteProfile } from "hooks/useCompleteProfile";
 import { useRouter } from "next/navigation";
+import LoadingDots from "components/LoadingDots";
 
 export type RegisterFormValues = {
   phone: string;
@@ -41,6 +41,7 @@ const steps = [
 
 export default function AuthForm() {
   const [activeStep, setActiveStep] = useState(0);
+  const { data, isLoading } = useCurrentUser();
   const [resendCountdown, setResendCountdown] = useState(0);
   const router = useRouter();
   const { mutate: sendOtp, isPending: isOtpLoading } = useRequestOtp();
@@ -65,6 +66,11 @@ export default function AuthForm() {
       email: "",
     },
   });
+
+  const currentStep =
+    data?.user && data.user.isVerifiedPhoneNumber && !data.user.isActive
+      ? 2
+      : activeStep;
 
   useEffect(() => {
     if (resendCountdown <= 0) return;
@@ -176,7 +182,7 @@ export default function AuthForm() {
       onSuccess: (data) => {
         toast.success(data.message);
         setTimeout(() => {
-          router.push("/");
+          router.replace("/");
         }, 1500);
       },
       onError: (error) => {
@@ -192,7 +198,7 @@ export default function AuthForm() {
    */
 
   const renderStep = () => {
-    switch (activeStep) {
+    switch (currentStep) {
       case 0:
         return (
           <MobileStep
@@ -220,6 +226,7 @@ export default function AuthForm() {
       case 2:
         return (
           <CompleteProfileStep
+            number={data?.user.phoneNumber || getValues("phone")}
             isCompletingProfile={isCompletingProfile}
             control={control}
             errors={errors}
@@ -246,23 +253,7 @@ export default function AuthForm() {
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
-        className="
-          flex
-          w-full
-          max-w-175
-          flex-col
-          overflow-hidden
-          rounded-2xl
-          border
-          border-secondary-50/50
-          bg-white
-          px-4
-          py-8
-          shadow-lg
-          sm:px-5
-          max-h-[calc(100dvh-2rem)]
-          sm:max-h-[calc(100dvh-3rem)]
-        "
+        className="flex w-full max-w-175 flex-col overflow-hidden rounded-2xl border border-secondary-50/50 bg-white px-4 py-8 shadow-lg sm:px-5 max-h-[calc(100dvh-2rem)] sm:max-h-[calc(100dvh-3rem)]"
       >
         {/* -------------------------------- */}
         {/* Header */}
@@ -287,60 +278,30 @@ export default function AuthForm() {
         {/* -------------------------------- */}
 
         <div
-          className="
-            mt-7
-            mb-7
-            flex
-            w-full
-            shrink-0
-            items-start
-            px-0
-            sm:mt-8
-            sm:mb-8
-            sm:px-6
-          "
+          className="mt-7 mb-7 flex w-full shrink-0 items-start px-0 sm:mt-8 sm:mb-8 sm:px-6"
           dir="rtl"
         >
           {steps.map((step, index) => {
-            const isCompleted = index < activeStep;
-            const isActive = index === activeStep;
+            const isCompleted = index < currentStep;
+            const isActive = index === currentStep;
 
             return (
               <React.Fragment key={step.label}>
                 {/* Step */}
                 <div className="flex shrink-0 flex-col items-center">
                   <div
-                    className={`
-                      flex
-                      p-2
-                      items-center
-                      justify-center
-                      rounded-full
-                      border-2
-                      transition-all
-                      duration-300
-                      
+                    className={`flex p-2 items-center justify-center rounded-full border-2 transition-all duration-300
                       ${
                         isCompleted || isActive
                           ? "border-primary-800 bg-primary-800 text-white"
                           : "border-gray-300 bg-white text-gray-400"
-                      }
-
-                    `}
+                      }`}
                   >
                     {step.icon}
                   </div>
 
                   <span
-                    className={`
-                      mt-2
-                      whitespace-nowrap
-                      text-[11px]
-                      font-medium
-                      transition-colors
-                      duration-300
-                      sm:text-xs
-
+                    className={`mt-2 whitespace-nowrap text-[11px] font-medium transition-colors duration-300 sm:text-x 
                       ${
                         isCompleted || isActive
                           ? "text-primary-800"
@@ -354,27 +315,9 @@ export default function AuthForm() {
 
                 {/* Connector */}
                 {index < steps.length - 1 && (
-                  <div
-                    className="
-                      relative
-                      mt-5
-                      h-0.5
-                      min-w-0
-                      flex-1
-                      overflow-hidden
-                      bg-gray-300
-                    "
-                  >
+                  <div className="relative mt-5 h-0.5 min-w-0 flex-1 overflow-hidden bg-gray-300">
                     <div
-                      className={`
-                        absolute
-                        inset-y-0
-                        right-0
-                        bg-primary-800
-                        transition-[width]
-                        duration-700
-                        ease-out
-
+                      className={`absolute inset-y-0 right-0 bg-primary-800 transition-[width] duration-700 ease-ou 
                         ${isCompleted ? "w-full" : "w-0"}
                       `}
                     />
@@ -384,26 +327,21 @@ export default function AuthForm() {
             );
           })}
         </div>
-        <Box
-          className="
-            min-h-0
-            flex-1
-            overflow-y-auto
-            px-0.5
-          "
-        >
-          <div
-            key={activeStep}
-            className="
-              animate-in!
-              fade-in!
-              slide-in-from-left-4!
-              duration-300
-            "
-          >
-            {renderStep()}
-          </div>
-        </Box>
+        {isLoading && (
+          <Box className="flex h-44 w-full items-center justify-center bg-white">
+            <LoadingDots />
+          </Box>
+        )}
+        {!isLoading && (
+          <Box className="min-h-0 flex-1 overflow-y-auto px-0.5">
+            <div
+              key={activeStep}
+              className="animate-in! fade-in! slide-in-from-left-4! duration-300"
+            >
+              {renderStep()}
+            </div>
+          </Box>
+        )}
       </Box>
     </Box>
   );
