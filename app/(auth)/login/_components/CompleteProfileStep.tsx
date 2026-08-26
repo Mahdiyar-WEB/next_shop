@@ -3,10 +3,12 @@ import { RegisterFormValues } from "./AuthForm";
 import { Box, Button, Typography } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import Textfield from "components/Textfield";
+import toPersianDigits from "utils/toPersianDigits";
 
 type UserInfoStepProps = {
   control: Control<RegisterFormValues>;
   errors: FieldErrors<RegisterFormValues>;
+  number: string;
   isCompletingProfile: boolean;
 };
 
@@ -14,11 +16,14 @@ const CompleteProfileStep = ({
   control,
   errors,
   isCompletingProfile,
+  number,
 }: UserInfoStepProps) => {
   return (
     <Box>
-      <Typography variant="body1" className="font-bold!">
-        اطلاعات خود را تکمیل کنید
+      <Typography variant="body1" className="font-bold! space-x-1.5">
+        <span>اطلاعات خود را برای شماره</span>
+        <span>{toPersianDigits(number)}</span>
+        <span>وارد کنید</span>
       </Typography>
 
       <Typography
