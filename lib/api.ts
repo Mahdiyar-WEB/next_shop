@@ -18,7 +18,7 @@ export const fail = (error: unknown) =>
   NextResponse.json(
     {
       statusCode: error instanceof ApiError ? error.status : 500,
-      message: error instanceof Error ? error.message : "خطای غیرمنتظرهٔ سرور",
+      message: error instanceof Error ? error.message : error,
     },
     { status: error instanceof ApiError ? error.status : 500 },
   );
