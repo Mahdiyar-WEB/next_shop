@@ -53,6 +53,6 @@ export async function POST(request: Request) {
       phoneNumber: phoneNumber.trim(),
     });
   } catch (error) {
-    return fail(error);
+    return fail("خطا در ارسال کد تایید لطفا بعدا تلاش کنید");
   }
 }
