@@ -8,6 +8,7 @@ export function useCurrentUser() {
     queryKey: queryKeys.me,
     queryFn: userServices.me,
     staleTime: 5 * 60_000,
+    retry: false,
   });
 }
 export function useRequestOtp() {
