@@ -41,7 +41,6 @@
   --shadow-input-focus: 0 0 0 3px rgb(183 197 255 / 0.25);
 }
 
-
 @utility btn {
   @apply px-2 py-1 font-bold rounded-2xl transition-all duration-300;
 }
@@ -96,4 +95,22 @@ body {
   user-select: none;
   font-family: var(--font-vazir);
   background-color: rgb(244 245 247);
+}
+
+.animate-bounce-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bounce-dot 0.9s ease-in-out infinite;
+}
+
+@keyframes bounce-dot {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-7px);
+  }
 }
