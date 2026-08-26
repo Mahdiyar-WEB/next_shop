@@ -7,6 +7,7 @@ import { AppRouterCacheProvider } from "@mui/material-nextjs/v13-appRouter";
 import { ThemeProvider } from "@mui/material";
 import theme from "theme/theme";
 import ToastProvider from "./ToastProvider";
+import UserProvider from "providers/UserProvider";
 
 export const metadata: Metadata = {
   title: {
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   description: "وب اپلیکیشن ویرا",
 };
 
+export const instant = false;
+
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fa" className={`${vazirFont.variable} font-sans`} dir="rtl">
@@ -24,7 +27,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
               <ToastProvider />
-              {children}
+              <UserProvider>{children}</UserProvider>
             </ThemeProvider>
           </AppRouterCacheProvider>
         </QueryProvider>
