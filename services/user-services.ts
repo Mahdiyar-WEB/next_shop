@@ -1,3 +1,4 @@
+import { User } from "types/userType";
 import { adminServices } from "./admin-services";
 import { apiClient } from "./client";
 
@@ -7,7 +8,7 @@ type CompleteProfilePayload = {
 };
 
 export const userServices = {
-  me: () => apiClient.get<{ user: unknown }>("/api/users/me"),
+  me: () => apiClient.get<{ user: User }>("/api/users/me"),
   updateMe: (data: unknown) =>
     apiClient.patch<{ user: unknown }>("/api/users/me", data),
   completeProfile: (data: CompleteProfilePayload) =>
