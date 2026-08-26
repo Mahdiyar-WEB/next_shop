@@ -4,11 +4,9 @@ import middlewareAuth from "utils/middlewareAuth";
 export async function proxy(request: NextRequest) {
   const pathName = request.nextUrl.pathname;
   const user = await middlewareAuth(request);
-  console.log('hi');
-  
 
-  if (pathName === "/login" && user) {
-    return NextResponse.redirect(new URL("/profile", request.url));
+  if (pathName === "/login" && user && user.isActive) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   if (pathName.startsWith("/profile") && !user) {
