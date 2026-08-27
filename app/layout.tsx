@@ -22,7 +22,7 @@ export const instant = false;
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="fa" className={`${vazirFont.variable} font-sans`} dir="rtl">
-      <body className="min-h-full">
+      <body>
         <QueryProvider>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
