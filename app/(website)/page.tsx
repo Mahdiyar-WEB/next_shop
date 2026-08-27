@@ -5,5 +5,5 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-  return <div>main</div>;
+  return <div className="h-[2000px] text-center">main</div>;
 }

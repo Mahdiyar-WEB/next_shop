@@ -239,17 +239,7 @@ export default function AuthForm() {
   };
 
   return (
-    <Box
-      className="
-        flex
-        min-h-full
-        w-full
-        items-center
-        justify-center
-        sm:p-6
-        bg-white
-      "
-    >
+    <Box className="flex min-h-full w-full items-center justify-center sm:p-6 bg-white">
       <Box
         component="form"
         onSubmit={handleSubmit(onSubmit)}
