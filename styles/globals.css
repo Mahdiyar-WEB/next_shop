@@ -94,7 +94,6 @@ body {
   min-height: 100vh;
   user-select: none;
   font-family: var(--font-vazir);
-  background-color: rgb(244 245 247);
 }
 
 .animate-bounce-dot {
