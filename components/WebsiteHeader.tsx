@@ -63,9 +63,9 @@ const RootLayoutHeader = () => {
             )}
             <Link
               href="/cart"
-              className="ps-5 text-secondary-900 ms-3 border-r border-secondary-50"
+              className="ps-3 md:ps-5 text-secondary-900 ms-1 md:ms-3 border-r border-secondary-50"
             >
-              <ShoppingCartOutlinedIcon className="h-7! w-7!" />
+              <ShoppingCartOutlinedIcon className="h-6.5! w-6.5! md:h-7! md:w-7!" />
             </Link>
           </div>
         </nav>
@@ -92,7 +92,7 @@ const ProfileMenu = ({ user }: { user: User }) => {
         aria-expanded={open}
         className={`cursor-pointer rounded-md text-secondary-800 py-1 ${open ? "bg-secondary-50/50" : ""}`}
       >
-        <PersonOutlineOutlinedIcon className="h-8.5! w-8.5! -me-1" />
+        <PersonOutlineOutlinedIcon className="w-7! h-7! md:h-8.5! md:w-8.5! -me-1" />
         <ArrowDropDownIcon />
       </button>
       <Menu
