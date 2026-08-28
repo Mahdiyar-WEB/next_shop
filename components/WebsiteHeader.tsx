@@ -126,7 +126,7 @@ const ProfileMenu = ({ user }: { user: User }) => {
             href="/profile"
             className="w-full flex items-center justify-between py-4 px-2.5"
           >
-            {truncateText(user.name, 15)}
+            {truncateText(user.name || "پروفایل", 15)}
             <ArrowBackIosNewIcon sx={{ height: 16, width: 16 }} />
           </Link>
         </MenuItem>
