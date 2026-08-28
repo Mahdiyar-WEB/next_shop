@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "ویرا | خانه",
+  title: "خانه",
 };
 
 export default function Home() {
