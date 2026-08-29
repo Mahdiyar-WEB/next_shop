@@ -87,6 +87,23 @@ input:-webkit-autofill:active {
   transition: background-color 9999s ease-out 0s;
 }
 
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgb(92 124 255) transparent;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 html,
 body {
   margin: 0;
