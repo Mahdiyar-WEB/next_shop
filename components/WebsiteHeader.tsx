@@ -19,7 +19,11 @@ const RootLayoutHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 ">
-      <div className="h-6 w-full bg-blue-500"></div>
+      <div className="h-7 w-full bg-sky-600 flex items-center gap-1  justify-center text-white text-xs">
+        <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+        <span>ویرا مرجع فروش لوازم دیجیتال به صورت نقد و اقساط</span>
+        <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
+      </div>
       <div className="bg-white/50 backdrop-blur-xs pt-1 px-4 md:px-8 min-h-17 w-[95%] 2xl:max-w-screen-2xl mx-auto mb-10 rounded-b-2xl border border-secondary-50/50">
         <nav className="flex items-center justify-between min-h-17">
           <div className="flex items-center gap-6 md:gap-8 min-w-0">
