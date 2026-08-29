@@ -1,13 +1,13 @@
 import WebsiteHeader from "components/WebsiteHeader";
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 
 export const instant = false;
 
 export default function WebsiteLayout({ children }: { children: ReactNode }) {
   return (
-    <body>
+    <Fragment>
       <WebsiteHeader />
       {children}
-    </body>
+    </Fragment>
   );
 }
