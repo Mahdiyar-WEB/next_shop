@@ -18,8 +18,9 @@ const RootLayoutHeader = () => {
   const { user, isLoading } = useUserStore();
 
   return (
-    <header className="sticky top-4 z-50 w-[95%] 2xl:max-w-screen-2xl mx-auto mb-10 ">
-      <div className="bg-white/50 backdrop-blur-xs border border-secondary-50 rounded-2xl px-4 md:px-8 min-h-17">
+    <header className="sticky top-0 z-50 ">
+      <div className="h-6 w-full bg-blue-500"></div>
+      <div className="bg-white/50 backdrop-blur-xs pt-1 px-4 md:px-8 min-h-17 w-[95%] 2xl:max-w-screen-2xl mx-auto mb-10 rounded-b-2xl border border-secondary-50/50">
         <nav className="flex items-center justify-between min-h-17">
           <div className="flex items-center gap-6 md:gap-8 min-w-0">
             <Link href="/" className="hidden md:flex items-center gap-1">
@@ -40,7 +41,7 @@ const RootLayoutHeader = () => {
                 <HeaderLink path="/" text="خانه" />
               </li>
               <li>
-                <HeaderLink path="/blogs" text="بلاگ‌ها" />
+                <HeaderLink path="/products" text="محصولات" />
               </li>
             </ul>
           </div>
@@ -65,7 +66,7 @@ const RootLayoutHeader = () => {
               href="/cart"
               className="ps-3 md:ps-5 text-secondary-900 ms-1 md:ms-3 border-r border-secondary-50"
             >
-              <ShoppingCartOutlinedIcon className="h-6.5! w-6.5! md:h-7! md:w-7!" />
+              <ShoppingCartOutlinedIcon className="h-6.5! w-6.5!" />
             </Link>
           </div>
         </nav>
@@ -92,7 +93,7 @@ const ProfileMenu = ({ user }: { user: User }) => {
         aria-expanded={open}
         className={`cursor-pointer rounded-md text-secondary-800 py-1 ${open ? "bg-secondary-50/50" : ""}`}
       >
-        <PersonOutlineOutlinedIcon className="w-7! h-7! md:h-8.5! md:w-8.5! -me-1" />
+        <PersonOutlineOutlinedIcon className="w-7! h-7! -me-1" />
         <ArrowDropDownIcon />
       </button>
       <Menu
