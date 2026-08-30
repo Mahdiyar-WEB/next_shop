@@ -21,8 +21,13 @@ export const instant = false;
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="fa" className={`${vazirFont.variable} font-sans`} dir="rtl">
-      <body>
+    <html
+      data-scroll-behavior="smooth"
+      lang="fa"
+      className={`${vazirFont.variable} font-sans`}
+      dir="rtl"
+    >
+      <body className="relative">
         <QueryProvider>
           <AppRouterCacheProvider>
             <ThemeProvider theme={theme}>
