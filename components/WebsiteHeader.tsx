@@ -13,6 +13,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LoginIcon from "@mui/icons-material/Login";
 import { User } from "types/userType";
 import truncateText from "utils/truncateText";
+import SearchBox from "./SearchBox";
 
 const RootLayoutHeader = () => {
   const { user, isLoading } = useUserStore();
@@ -24,10 +25,10 @@ const RootLayoutHeader = () => {
         <span>ویرا مرجع فروش لوازم دیجیتال به صورت نقد و اقساط</span>
         <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
       </div>
-      <div className="bg-white/50 backdrop-blur-xs pt-1 px-4 md:px-8 min-h-17 w-[95%] 2xl:max-w-screen-2xl mx-auto mb-10 rounded-b-2xl border border-secondary-50/50">
+      <div className="bg-white/50 backdrop-blur-xs pt-1 px-2 sm:px-4 md:px-8 min-h-17 w-full sm:w-[95%] 2xl:max-w-screen-2xl mx-auto mb-10 sm:rounded-b-2xl border border-secondary-50/50">
         <nav className="flex items-center justify-between min-h-17">
-          <div className="flex items-center gap-6 md:gap-8 min-w-0">
-            <Link href="/" className="hidden md:flex items-center gap-1">
+          <div className="flex items-center gap-6 lg:gap-6 min-w-0">
+            <Link href="/" className="flex items-center gap-1">
               <Image
                 src="/logo.webp"
                 width={200}
@@ -39,15 +40,9 @@ const RootLayoutHeader = () => {
                 ویرا
               </span>
             </Link>
-
-            <ul className="flex items-center gap-6 md:gap-8">
-              <li>
-                <HeaderLink path="/" text="خانه" />
-              </li>
-              <li>
-                <HeaderLink path="/products" text="محصولات" />
-              </li>
-            </ul>
+            <div className="hidden lg:flex">
+              <SearchBox className="flex border border-secondary-100 rounded-xl px-2 py-2 w-96" />
+            </div>
           </div>
 
           <div className="flex items-center justify-end min-w-33 h-12 shrink-0">
@@ -159,42 +154,6 @@ const ProfileMenu = ({ user }: { user: User }) => {
         </MenuItem>
       </Menu>
     </>
-  );
-};
-
-const HeaderLink = ({
-  path = "/",
-  text,
-  className = "",
-  prefetch = "auto",
-}: {
-  path: string;
-  text: string;
-  className?: string;
-  prefetch?: "auto";
-}) => {
-  const pathName = usePathname();
-
-  const active =
-    path === "/"
-      ? pathName === "/"
-      : pathName === path || pathName.startsWith(`${path}/`);
-
-  return (
-    <Link
-      prefetch={prefetch}
-      href={path}
-      className={`relative inline-flex items-center h-10 font-semibold transition-colors duration-200 ${
-        active
-          ? "text-primary-700"
-          : "text-secondary-900 hover:text-primary-500"
-      } ${className}`}
-    >
-      {text}
-      {active && (
-        <span className="absolute bottom-0 right-0 w-full h-0.5 bg-primary-700 rounded-full" />
-      )}
-    </Link>
   );
 };
 
