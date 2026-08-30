@@ -1,11 +1,10 @@
 "use client";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useUserStore } from "stores/user-store";
+import { Logout, PersonAdd, Settings } from "@mui/icons-material";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
@@ -17,6 +16,13 @@ import SearchBox from "./SearchBox";
 
 const RootLayoutHeader = () => {
   const { user, isLoading } = useUserStore();
+  const [isDesktop, setIsDesktop] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsDesktop(window.innerWidth > 1024);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 ">
@@ -41,7 +47,12 @@ const RootLayoutHeader = () => {
               </span>
             </Link>
             <div className="hidden lg:flex">
-              <SearchBox className="flex border border-secondary-100 rounded-xl px-2 py-2 w-96" />
+              {isDesktop && (
+                <SearchBox
+                  className="flex border border-secondary-100 rounded-xl px-2 w-96 duration-150 focus-within:border-primary-500 focus-within:shadow-md focus-within:shadow-primary-100"
+                  inputClassName="text-sm py-2"
+                />
+              )}
             </div>
           </div>
 
