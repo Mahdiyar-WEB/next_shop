@@ -1,3 +1,4 @@
+import MobileSearch from "components/MobileSearch";
 import WebsiteHeader from "components/WebsiteHeader";
 import { Fragment, ReactNode } from "react";
 
@@ -8,6 +9,7 @@ export default function WebsiteLayout({ children }: { children: ReactNode }) {
     <Fragment>
       <WebsiteHeader />
       {children}
+      <MobileSearch />
     </Fragment>
   );
 }
