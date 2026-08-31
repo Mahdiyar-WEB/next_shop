@@ -2,20 +2,30 @@ import { NextRequest, NextResponse } from "next/server";
 import middlewareAuth from "utils/middlewareAuth";
 
 export async function proxy(request: NextRequest) {
-  const pathName = request.nextUrl.pathname;
+  const pathname = request.nextUrl.pathname;
   const user = await middlewareAuth(request);
 
-  if (pathName === "/login" && user && user.isActive) {
+  if (pathname === "/login" && user?.isActive) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (pathName.startsWith("/profile") && !user) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  if (
+    pathname.startsWith("/admin") &&
+    (!user || user.role !== "ADMIN")
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
+  }
+
+  if (
+    pathname.startsWith("/profile") &&
+    (!user || user.role !== "USER")
+  ) {
+    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/profile/:path*", "/login"],
+  matcher: ["/dashboard/:path*", "/admin/:path*", "/login"],
 };
