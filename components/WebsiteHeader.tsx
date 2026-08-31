@@ -11,7 +11,6 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useUserStore } from "stores/user-store";
-import truncateText from "utils/truncateText";
 import SearchBox from "./SearchBox";
 import { User } from "types/userType";
 
@@ -118,15 +117,13 @@ const ProfileMenu = ({ user }: { user: User }) => {
           paper: {
             elevation: 0,
             sx: {
-              width: 250,
+              width: 200,
               overflow: "visible",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.2))",
               mt: 1,
               "& .MuiAvatar-root": {
                 width: 32,
                 height: 32,
-                // ml: -0.5,
-                // mr: 1,
               },
             },
           },
@@ -139,11 +136,14 @@ const ProfileMenu = ({ user }: { user: User }) => {
             href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
             className="w-full flex items-center justify-between py-4 px-2.5"
           >
-            {truncateText(user.name || "پروفایل", 15)}
+            {user.role === "ADMIN" ? "پنل ادمین" : "پنل کاربری"}
             <ArrowBackIosNewIcon sx={{ height: 16, width: 16 }} />
           </Link>
         </MenuItem>
-        <MenuItem onClick={handleClose} className="py-3! space-x-2 text-red-500! text-sm!">
+        <MenuItem
+          onClick={handleClose}
+          className="py-3! space-x-2 text-red-500! text-sm!"
+        >
           <Logout fontSize="small" />
           <span>خروج از حساب</span>
         </MenuItem>
