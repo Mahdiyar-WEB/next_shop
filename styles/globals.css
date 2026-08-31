@@ -89,7 +89,6 @@ input:-webkit-autofill:active {
 
 * {
   box-sizing: border-box;
-  scroll-behavior: smooth;
   outline: none;
   scrollbar-width: thin;
   scrollbar-color: rgb(92 124 255) transparent;
