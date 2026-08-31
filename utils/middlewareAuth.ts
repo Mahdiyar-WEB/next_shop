@@ -1,4 +1,5 @@
 import { NextRequest } from "next/server";
+import { User } from "types/userType";
 
 export default async function middlewareAuth(req: NextRequest) {
   try {
@@ -44,7 +45,7 @@ export default async function middlewareAuth(req: NextRequest) {
 
     const result = await userRes.json();
 
-    return result?.data?.user ?? null;
+    return (result?.data?.user as User) ?? null;
   } catch {
     return null;
   }
