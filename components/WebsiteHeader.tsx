@@ -1,18 +1,19 @@
 "use client";
-import { Avatar, Divider, ListItemIcon, Menu, MenuItem } from "@mui/material";
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useUserStore } from "stores/user-store";
-import { Logout, PersonAdd, Settings } from "@mui/icons-material";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import Logout from "@mui/icons-material/Logout";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import LoginIcon from "@mui/icons-material/Login";
-import { User } from "types/userType";
+import { useEffect, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { useUserStore } from "stores/user-store";
 import truncateText from "utils/truncateText";
 import SearchBox from "./SearchBox";
+import { User } from "types/userType";
 
 const RootLayoutHeader = () => {
   const { user, isLoading } = useUserStore();
@@ -117,6 +118,7 @@ const ProfileMenu = ({ user }: { user: User }) => {
           paper: {
             elevation: 0,
             sx: {
+              width: 250,
               overflow: "visible",
               filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.2))",
               mt: 1,
@@ -134,34 +136,16 @@ const ProfileMenu = ({ user }: { user: User }) => {
       >
         <MenuItem onClick={handleClose} sx={{ padding: 0 }} divider>
           <Link
-            href="/profile"
+            href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
             className="w-full flex items-center justify-between py-4 px-2.5"
           >
             {truncateText(user.name || "پروفایل", 15)}
             <ArrowBackIosNewIcon sx={{ height: 16, width: 16 }} />
           </Link>
         </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <Avatar /> My account
-        </MenuItem>
-        <Divider />
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <PersonAdd fontSize="small" />
-          </ListItemIcon>
-          Add another account
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem onClick={handleClose}>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
+        <MenuItem onClick={handleClose} className="py-3! space-x-2 text-red-500! text-sm!">
+          <Logout fontSize="small" />
+          <span>خروج از حساب</span>
         </MenuItem>
       </Menu>
     </>
