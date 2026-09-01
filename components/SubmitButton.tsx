@@ -1,0 +1,38 @@
+import { ReactNode } from "react";
+import Button from "./Button";
+
+const SubmitButton = ({
+  children,
+  loading = false,
+  className = "",
+}: {
+  children: ReactNode;
+  loading: boolean;
+  className: string;
+}) => {
+  return (
+    <Button className={`${className} font-bold`} type="submit">
+      {loading ? <Spinner /> : children}
+    </Button>
+  );
+};
+
+const Spinner = () => (
+  <svg className="animate-spin w-6 h-6 mx-auto" fill="none" viewBox="0 0 24 24">
+    <circle
+      className="opacity-25"
+      cx="12"
+      cy="12"
+      r="10"
+      stroke="currentColor"
+      strokeWidth="4"
+    />
+    <path
+      className="opacity-75"
+      fill="currentColor"
+      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+    />
+  </svg>
+);
+
+export default SubmitButton;
