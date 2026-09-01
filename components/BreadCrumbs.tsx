@@ -24,7 +24,7 @@ const BreadCrumbs = ({ slugTitle = "" }) => {
   return (
     <nav
       aria-label="breadcrumb"
-      className={`mb-5 text-sm h-full bg-white w-fit px-3 py-2 rounded-xl shadow-sm border border-secondary-100`}
+      className={`mb-5 text-sm h-full bg-white w-fit px-3 py-2 rounded-xl shadow-sm border border-gray-100`}
     >
       <ol className="flex items-center gap-2 flex-wrap">
         <li>
