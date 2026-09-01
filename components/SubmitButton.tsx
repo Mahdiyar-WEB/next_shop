@@ -5,13 +5,19 @@ const SubmitButton = ({
   children,
   loading = false,
   className = "",
+  disabled = false,
 }: {
   children: ReactNode;
   loading: boolean;
   className: string;
+  disabled?: boolean;
 }) => {
   return (
-    <Button className={`${className} font-bold`} type="submit">
+    <Button
+      disabled={disabled}
+      className={`${className} font-bold`}
+      type="submit"
+    >
       {loading ? <Spinner /> : children}
     </Button>
   );
