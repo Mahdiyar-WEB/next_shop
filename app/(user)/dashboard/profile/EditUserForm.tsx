@@ -82,8 +82,8 @@ const EditUserForm = () => {
       onSubmit={handleSubmit(onSubmit)}
       className="w-full relative h-100 md:w-2/3 flex flex-col gap-6 bg-white border border-gray-200 mx-auto mt-18 px-5 pb-5 pt-16 rounded-lg shadow-md"
     >
-      <p className="absolute flex items-center gap-2 right-2 -top-8 w-fit text-white bg-primary-800  text-lg font-semibold px-5 py-3 rounded-md">
-        <PersonIcon className="size-7!" />
+      <p className="absolute flex items-center gap-2 right-2 -top-8 w-fit text-white bg-primary-800  md:text-lg font-semibold px-5 py-3 rounded-md">
+        <PersonIcon className="size-6! md:size-7!" />
         <span>اطلاعات کاربری</span>
       </p>
       <div>
