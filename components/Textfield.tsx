@@ -136,6 +136,15 @@ const Textfield = ({
             value={inputValue}
             onChange={inputOnChange}
             onBlur={inputOnBlur}
+            autoComplete={
+              rest.type === "email"
+                ? "email"
+                : inputName === "name"
+                  ? "given-name"
+                  : inputName === "lastName"
+                    ? "family-name"
+                    : "off"
+            }
             placeholder={placeholder}
             className={`
               peer
