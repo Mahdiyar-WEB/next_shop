@@ -12,7 +12,7 @@ export const userServices = {
   updateMe: (data: unknown) =>
     apiClient.patch<{ user: unknown }>("/api/users/me", data),
   completeProfile: (data: CompleteProfilePayload) =>
-    apiClient.post<{ user: unknown; message: string }>(
+    apiClient.post<{ user: User; message: string }>(
       "/api/users/complete-profile",
       data,
     ),
