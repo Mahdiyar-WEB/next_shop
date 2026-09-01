@@ -17,13 +17,15 @@ const Button = ({
   children,
   className,
   variant = "primary",
+  disabled,
   ...rest
 }: Props) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`btn ${buttonVariants[variant]} ${className}`}
+      className={`btn ${buttonVariants[variant]} ${disabled ? "opacity-50 cursor-not-allowed" : "opacity-100 cursor-pointer"} ${className}`}
+      disabled={disabled}
       {...rest}
     >
       {children}
