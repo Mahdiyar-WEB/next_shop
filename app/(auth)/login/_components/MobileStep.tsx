@@ -2,7 +2,7 @@ import { Control, Controller } from "react-hook-form";
 import { RegisterFormValues } from "./AuthForm";
 import { Box, Button, Typography } from "@mui/material";
 import toPersianDigits from "utils/toPersianDigits";
-import Textfield from "components/Textfield";
+import TextField from "components/TextField";
 
 const PHONE_REGEX = /^9\d{9}$/;
 
@@ -37,7 +37,7 @@ const MobileStep = ({
             },
           }}
           render={({ field }) => (
-            <Textfield
+            <TextField
               {...field}
               autoFocus
               fullWidth

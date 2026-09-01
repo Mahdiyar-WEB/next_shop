@@ -2,7 +2,7 @@ import { Control, Controller, FieldErrors } from "react-hook-form";
 import { RegisterFormValues } from "./AuthForm";
 import { Box, Button, Typography } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-import Textfield from "components/Textfield";
+import TextField from "components/TextField";
 import toPersianDigits from "utils/toPersianDigits";
 
 type UserInfoStepProps = {
@@ -46,7 +46,7 @@ const CompleteProfileStep = ({
             },
           }}
           render={({ field }) => (
-            <Textfield
+            <TextField
               {...field}
               autoFocus
               fullWidth
@@ -68,7 +68,7 @@ const CompleteProfileStep = ({
             },
           }}
           render={({ field }) => (
-            <Textfield
+            <TextField
               {...field}
               fullWidth
               label="نام خانوادگی"
@@ -89,7 +89,7 @@ const CompleteProfileStep = ({
               },
             }}
             render={({ field }) => (
-              <Textfield
+              <TextField
                 {...field}
                 dir="ltr"
                 type="email"
