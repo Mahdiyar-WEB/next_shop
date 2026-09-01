@@ -223,7 +223,7 @@ function ProfileMenu({
       </div>
 
       <ProfileMenuItem
-        href={`/dashboard/profile?id=${user?._id}`}
+        href={`/dashboard/profile`}
         onClick={onClose}
         icon={
           <svg
