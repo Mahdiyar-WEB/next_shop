@@ -1,3 +1,4 @@
+import { User } from "types/userType";
 import { apiClient } from "./client";
 
 export const authentication = {
@@ -10,7 +11,7 @@ export const authentication = {
     }>("/api/auth/request-otp", { phoneNumber }),
   verifyOtp: (phoneNumber: string, code: string) =>
     apiClient.post<{
-      user: unknown;
+      user: User;
       needsProfileCompletion: boolean;
       message: string;
     }>("/api/auth/verify-otp", { phoneNumber, code }),
