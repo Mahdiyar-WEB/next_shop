@@ -125,7 +125,11 @@ export default function AuthForm() {
       {
         onSuccess: (data) => {
           toast.success(data.message);
-          setActiveStep(2);
+          if (data.user.isVerifiedPhoneNumber && data.user.isActive) {
+            router.replace("/dashboard");
+          } else {
+            setActiveStep(2);
+          }
         },
         onError: (error) => {
           toast.error(error.message);
