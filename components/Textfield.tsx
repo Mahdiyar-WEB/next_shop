@@ -143,7 +143,9 @@ const Textfield = ({
                   ? "given-name"
                   : inputName === "lastName"
                     ? "family-name"
-                    : "off"
+                    : inputName === "phone"
+                      ? "tel"
+                      : "off"
             }
             placeholder={placeholder}
             className={`
