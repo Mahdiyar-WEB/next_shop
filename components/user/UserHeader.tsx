@@ -5,7 +5,7 @@ import { useLogout } from "hooks/use-auth";
 import useDelayedLoading from "hooks/useDelayedLoading";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useRef, useState } from "react";
 import { useUserStore } from "stores/user-store";
 import { User } from "types/userType";
@@ -335,10 +335,12 @@ export default function UserHeader({
 
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter();
 
   const onLogoutHandler = () => {
     setOpen(false);
     logout();
+    router.replace("/login");
   };
 
   useEffect(() => {
