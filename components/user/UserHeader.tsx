@@ -336,10 +336,12 @@ export default function UserHeader({
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
+  const { setUser } = useUserStore();
 
   const onLogoutHandler = () => {
     setOpen(false);
     logout();
+    setUser(null);
     router.replace("/login");
   };
 
