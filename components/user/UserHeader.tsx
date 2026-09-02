@@ -342,7 +342,7 @@ export default function UserHeader({
     setOpen(false);
     logout();
     setUser(null);
-    router.replace("/login");
+    router.replace("/");
   };
 
   useEffect(() => {
