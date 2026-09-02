@@ -17,7 +17,7 @@ export async function proxy(request: NextRequest) {
   }
 
   if (
-    pathname.startsWith("/profile") &&
+    pathname.startsWith("/dashboard") &&
     (!user || user.role !== "USER")
   ) {
     return NextResponse.redirect(new URL("/", request.url));
