@@ -2,7 +2,7 @@
 
 import UserDrawer from "components/user/UserDrawer";
 import UserHeader from "components/user/UserHeader";
-import { ReactNode, Suspense, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 export default function UserLayout({ children }: { children: ReactNode }) {
   const [desktopOpen, setDesktopOpen] = useState(true);
@@ -62,16 +62,12 @@ export default function UserLayout({ children }: { children: ReactNode }) {
       <div className="flex min-w-0 flex-1 flex-col">
         {/* Header */}
         <header className="sticky top-0 z-30 border-b border-secondary-200 bg-white/85 shadow-sm shadow-secondary-200/40 backdrop-blur-xl">
-          <Suspense>
-            <UserHeader onMobileToggle={() => setMobileOpen((prev) => !prev)} />
-          </Suspense>
+          <UserHeader onMobileToggle={() => setMobileOpen((prev) => !prev)} />
         </header>
 
         {/* Content */}
-        <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 sm:p-6 lg:p-8">
-          <div className="mx-auto w-full max-w-screen-2xl">
-            <Suspense>{children}</Suspense>
-          </div>
+        <main className="flex-1 overflow-x-hidden overflow-y-auto p-4 sm:p-6 lg:p-8 bg-linear-to-tr from-blue-100/50 via-white to-blue-100/50">
+          <div className="mx-auto w-full max-w-screen-2xl">{children}</div>
         </main>
       </div>
     </div>
