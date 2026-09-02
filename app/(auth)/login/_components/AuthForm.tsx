@@ -55,6 +55,7 @@ export default function AuthForm() {
     trigger,
     getValues,
     setValue,
+    reset,
     formState: { errors },
   } = useForm<RegisterFormValues>({
     mode: "onChange",
@@ -125,11 +126,15 @@ export default function AuthForm() {
       {
         onSuccess: (data) => {
           toast.success(data.message);
+
           if (data.user.isVerifiedPhoneNumber && data.user.isActive) {
-            router.replace("/dashboard");
-          } else {
-            setActiveStep(2);
+            reset();
+            setActiveStep(0);
+            setResendCountdown(0);
+            router.replace("/");
+            return;
           }
+          setActiveStep(2);
         },
         onError: (error) => {
           toast.error(error.message);
@@ -185,9 +190,10 @@ export default function AuthForm() {
     completeProfile(payload, {
       onSuccess: (data) => {
         toast.success(data.message);
-        setTimeout(() => {
-          router.replace("/");
-        }, 1500);
+        reset();
+        setActiveStep(0);
+        setResendCountdown(0);
+        router.replace("/");
       },
       onError: (error) => {
         toast.error(error.message);
