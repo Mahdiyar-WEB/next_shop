@@ -1,11 +1,9 @@
 "use client";
-import WebsiteHeader from "components/WebsiteHeader";
 import Link from "next/link";
 
 const NotFound = () => {
   return (
     <div>
-      <WebsiteHeader />
       <div className="my-20 ">
         <h1 className="text-center text-xl md:text-3xl font-bold text-secondary-800">
           صفحه ای که دنبالش بودی پیدا نشد! 😢
