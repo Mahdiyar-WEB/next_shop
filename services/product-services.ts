@@ -1,9 +1,10 @@
+import { Product } from "types/productType";
 import { adminServices } from "./admin-services";
 import { apiClient } from "./client";
 
 export const productServices = {
   getAll: (query = "") =>
-    apiClient.get<{ products: unknown[]; pagination: unknown }>(
+    apiClient.get<{ products: Product[]; pagination: unknown }>(
       `/api/products${query ? `?${query}` : ""}`,
     ),
   getBySlug: (slug: string) =>
