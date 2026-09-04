@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import SearchBox from "./SearchBox";
+import SearchBox from "../common/SearchBox";
 
 const MobileSearch = () => {
   const [isMobile, setIsMobile] = useState(false);

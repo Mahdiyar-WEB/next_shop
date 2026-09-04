@@ -14,7 +14,7 @@ import { useCurrentUser, useRequestOtp, useVerifyOtp } from "hooks/use-auth";
 import toast from "react-hot-toast";
 import { useCompleteProfile } from "hooks/useCompleteProfile";
 import { useRouter } from "next/navigation";
-import LoadingDots from "components/LoadingDots";
+import LoadingDots from "components/ui/LoadingDots";
 
 export type RegisterFormValues = {
   phone: string;

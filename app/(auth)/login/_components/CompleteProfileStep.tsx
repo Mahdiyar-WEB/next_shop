@@ -2,7 +2,7 @@ import { Control, Controller, FieldErrors } from "react-hook-form";
 import { RegisterFormValues } from "./AuthForm";
 import { Box, Button, Typography } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
-import TextField from "components/TextField";
+import TextField from "components/common/TextField";
 import toPersianDigits from "utils/toPersianDigits";
 
 type UserInfoStepProps = {

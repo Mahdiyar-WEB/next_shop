@@ -2,7 +2,7 @@
 
 import { ComponentProps, ReactNode, useId } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { RegisterFormValues } from "../app/(auth)/login/_components/AuthForm";
+import { RegisterFormValues } from "../../app/(auth)/login/_components/AuthForm";
 
 type Props = ComponentProps<"input"> & {
   label: string;

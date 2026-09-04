@@ -1,5 +1,5 @@
 import EditUserForm from "./EditUserForm";
-import BreadCrumbs from "components/BreadCrumbs";
+import BreadCrumbs from "components/common/BreadCrumbs";
 
 const EditUserPage = async () => {
   return (

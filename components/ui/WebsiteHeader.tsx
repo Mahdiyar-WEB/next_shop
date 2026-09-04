@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useUserStore } from "stores/user-store";
-import SearchBox from "./SearchBox";
+import SearchBox from "../common/SearchBox";
 import { User } from "types/userType";
 
 const RootLayoutHeader = () => {
@@ -26,7 +26,7 @@ const RootLayoutHeader = () => {
 
   return (
     <header className="sticky top-0 z-50 ">
-      <div className="h-7 w-full bg-sky-600 flex items-center gap-1  justify-center text-white text-xs">
+      <div className="h-7 w-full bg-sky-600 flex items-center gap-1 justify-center text-white text-xs">
         <span className="w-1.5 h-1.5 rounded-full bg-white"></span>
         <span>ویرا مرجع فروش لوازم دیجیتال به صورت نقد و اقساط</span>
         <span className="w-1.5 h-1.5 rounded-full bg-white"></span>

@@ -1,5 +1,5 @@
-import MobileSearch from "components/MobileSearch";
-import WebsiteHeader from "components/WebsiteHeader";
+import MobileSearch from "components/ui/MobileSearch";
+import WebsiteHeader from "components/ui/WebsiteHeader";
 import { Fragment, ReactNode } from "react";
 
 export const instant = false;

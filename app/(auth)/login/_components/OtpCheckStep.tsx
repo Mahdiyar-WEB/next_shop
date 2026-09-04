@@ -2,7 +2,7 @@ import { Control, Controller } from "react-hook-form";
 import { RegisterFormValues } from "./AuthForm";
 import { Box, Button, Typography } from "@mui/material";
 import toPersianDigits from "utils/toPersianDigits";
-import OtpInput from "components/OtpInput";
+import OtpInput from "components/common/OtpInput";
 import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 type OtpStepProps = {

@@ -1,8 +1,8 @@
 "use client";
 
 import { yupResolver } from "@hookform/resolvers/yup";
-import SubmitButton from "components/SubmitButton";
-import TextField from "components/TextField";
+import SubmitButton from "components/common/SubmitButton";
+import TextField from "components/common/TextField";
 import { useCompleteProfile } from "hooks/useCompleteProfile";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
