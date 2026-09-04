@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { productServices } from "services/product-services";
+import ProductsContainer from "./_components/ProductsContainer";
 
 export const metadata: Metadata = {
   title: "خانه",
@@ -22,5 +23,11 @@ const fetchProducts = async () => {
 export default async function Home() {
   const { accessories, laptops, mobiles } = await fetchProducts();
 
-  return <div className="h-[2000px] text-center">main</div>;
+  return (
+    <main className="text-center">
+      <ProductsContainer title="موبایل" products={mobiles.products} />
+      <ProductsContainer title="لپ تاپ" products={laptops.products} />
+      <ProductsContainer title="لوازم جانبی" products={accessories.products} />
+    </main>
+  );
 }
