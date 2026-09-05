@@ -13,7 +13,8 @@ type Props = {
 const ProductsCarousel = ({ products }: Props) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const isDragging = useRef(false);
+  const isMouseDown = useRef(false);
+  const hasDragged = useRef(false);
   const startX = useRef(0);
   const startScrollLeft = useRef(0);
 
@@ -64,29 +65,45 @@ const ProductsCarousel = ({ products }: Props) => {
 
     if (!container) return;
 
-    isDragging.current = true;
+    isMouseDown.current = true;
+    hasDragged.current = false;
 
     startX.current = e.pageX - container.offsetLeft;
     startScrollLeft.current = container.scrollLeft;
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging.current) return;
+    if (!isMouseDown.current) return;
 
     const container = containerRef.current;
 
     if (!container) return;
 
-    e.preventDefault();
-
     const x = e.pageX - container.offsetLeft;
-    const walk = (x - startX.current) * 1;
+    const walk = x - startX.current;
+
+    if (Math.abs(walk) > 5) {
+      hasDragged.current = true;
+    }
+
+    e.preventDefault();
 
     container.scrollLeft = startScrollLeft.current - walk;
   };
 
   const stopDragging = () => {
-    isDragging.current = false;
+    isMouseDown.current = false;
+  };
+
+  const handleClickCapture = (
+    e: React.MouseEvent<HTMLDivElement>
+  ) => {
+    if (!hasDragged.current) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    hasDragged.current = false;
   };
 
   return (
@@ -97,15 +114,16 @@ const ProductsCarousel = ({ products }: Props) => {
         onMouseMove={handleMouseMove}
         onMouseUp={stopDragging}
         onMouseLeave={stopDragging}
-        className={`flex gap-1 overflow-x-auto scrollbar-hide select-none`}
+        onClickCapture={handleClickCapture}
+        className="flex gap-1 overflow-x-auto select-none scrollbar-hide"
         dir="rtl"
       >
         {products.map((product) => (
           <div
             key={product._id}
-            className="w-60 shrink-0 border border-secondary-300 p-4 cursor-pointer"
+            className="w-60 shrink-0 cursor-pointer border border-secondary-300 p-4"
           >
-            <ProductCard key={product._id} product={product} />
+            <ProductCard product={product} />
           </div>
         ))}
       </div>
