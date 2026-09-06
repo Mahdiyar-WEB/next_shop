@@ -95,9 +95,7 @@ const ProductsCarousel = ({ products }: Props) => {
     isMouseDown.current = false;
   };
 
-  const handleClickCapture = (
-    e: React.MouseEvent<HTMLDivElement>
-  ) => {
+  const handleClickCapture = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!hasDragged.current) return;
 
     e.preventDefault();
@@ -107,7 +105,7 @@ const ProductsCarousel = ({ products }: Props) => {
   };
 
   return (
-    <div className="relative" dir="rtl">
+    <div className="group/carousel relative" dir="rtl">
       <div
         ref={containerRef}
         onMouseDown={handleMouseDown}
@@ -115,36 +113,35 @@ const ProductsCarousel = ({ products }: Props) => {
         onMouseUp={stopDragging}
         onMouseLeave={stopDragging}
         onClickCapture={handleClickCapture}
-        className="flex gap-1 overflow-x-auto select-none scrollbar-hide"
+        className="flex gap-3 overflow-x-auto select-none px-4 py-4 scrollbar-hide bg-blue-400 rounded-2xl sm:rounded-3xl sm:gap-3"
         dir="rtl"
       >
         {products.map((product) => (
-          <div
-            key={product._id}
-            className="w-60 shrink-0 cursor-pointer border border-secondary-300 p-4"
-          >
-            <ProductCard product={product} />
-          </div>
+          <ProductCard key={product._id} product={product} />
         ))}
       </div>
 
+      {/* دکمه راست */}
       {canScrollLeft && (
         <button
           type="button"
           onClick={() => scroll("right")}
-          className="absolute right-2 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white shadow-md transition hover:bg-secondary-50"
+          aria-label="محصولات قبلی"
+          className="absolute right-2 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white text-secondary-700 shadow-lg transition-all duration-200 hover:scale-105 hover:border-primary-200 hover:bg-primary-50 hover:text-primary-600 md:flex"
         >
-          <ChevronRightIcon />
+          <ChevronRightIcon fontSize="small" />
         </button>
       )}
 
+      {/* دکمه چپ */}
       {canScrollRight && (
         <button
           type="button"
           onClick={() => scroll("left")}
-          className="absolute left-2 top-1/2 z-10 flex size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white shadow-md transition hover:bg-secondary-50"
+          aria-label="محصولات بعدی"
+          className="absolute left-2 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white text-secondary-700 shadow-lg transition-all duration-200 hover:scale-105 hover:border-primary-200 hover:bg-primary-50 hover:text-primary-600 md:flex"
         >
-          <ChevronLeftIcon />
+          <ChevronLeftIcon fontSize="small" />
         </button>
       )}
     </div>
