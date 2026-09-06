@@ -9,7 +9,7 @@ type Props = {
 
 const ProductsContainer = ({ products, title }: Props) => {
   return (
-    <section className="w-full 2xl:max-w-screen-xl border border-secondary-300 rounded-xl mx-auto p-5 mb-10">
+    <section className="w-full xl:max-w-7xl border border-secondary-300 rounded-xl mx-auto p-5 mb-10">
       <h3 className="text-start text-xl font-medium mb-7">
         {title}
       </h3>
