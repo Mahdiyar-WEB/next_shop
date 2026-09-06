@@ -121,7 +121,7 @@ const ProductsCarousel = ({ products }: Props) => {
         ))}
       </div>
 
-      {/* دکمه راست */}
+      {/* Right */}
       {canScrollLeft && (
         <button
           type="button"
@@ -133,7 +133,7 @@ const ProductsCarousel = ({ products }: Props) => {
         </button>
       )}
 
-      {/* دکمه چپ */}
+      {/* Left */}
       {canScrollRight && (
         <button
           type="button"
