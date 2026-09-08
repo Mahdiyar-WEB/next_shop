@@ -37,6 +37,9 @@ const BreadCrumbs = ({ slugTitle = "" }) => {
         </li>
 
         {segments.map((segment, index) => {
+          if (segment === "product") {
+            return null;
+          }
           const href = `/${segments.slice(0, index + 1).join("/")}`;
 
           const isLast = index === segments.length - 1;
