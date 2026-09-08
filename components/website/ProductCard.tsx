@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Product } from "types/productType";
 import formatPrice from "utils/formatPrice";
+import toPersianDigits from "utils/toPersianDigits";
 import truncateText from "utils/truncateText";
 
 type Props = {
@@ -9,7 +10,8 @@ type Props = {
 };
 
 const ProductCard = ({ product }: Props) => {
-  const isAvailable = product.countInStock > 0;
+  const counts = product.countInStock;
+  const isAvailable = !!counts;
   const hasDiscount = product.discount > 0;
 
   return (
@@ -37,6 +39,14 @@ const ProductCard = ({ product }: Props) => {
         {hasDiscount && (
           <p className="absolute right-2 top-2 rounded-lg bg-primary-700 px-2 py-1 text-[13px] font-semibold text-white shadow-sm">
             <span className="ms-px">{formatPrice(product.discount)}</span>٪
+          </p>
+        )}
+        {/* Discount */}
+        {counts < 3 && (
+          <p className="absolute left-2 top-2 rounded-lg px-2 py-1 text-[13px] font-semibold shadow-sm flex gap-1 text-white bg-error">
+            <span>فقط</span>
+            <span>{toPersianDigits(counts)}</span>
+            <span>عدد در انبار</span>
           </p>
         )}
       </div>
