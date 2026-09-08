@@ -4,6 +4,11 @@ interface Category {
   englishTitle: string;
 }
 
+interface Features {
+  title: string;
+  englishTitle: string;
+  value: string;
+}
 export interface Product {
   _id: string;
   title: string;
@@ -22,4 +27,5 @@ export interface Product {
   likes: string[];
   createdAt: string;
   updatedAt: string;
+  features: Features[];
 }

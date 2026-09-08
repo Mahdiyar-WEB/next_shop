@@ -83,6 +83,27 @@ const categorySchema = new Schema(
 );
 categorySchema.index({ title: "text", englishTitle: "text" });
 
+const featureSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    englishTitle: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    value: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+  },
+  { _id: false },
+);
+
 const productSchema = new Schema(
   {
     title: { type: String, required: true, trim: true },
@@ -95,6 +116,7 @@ const productSchema = new Schema(
       lowercase: true,
     },
     category: { type: Schema.Types.ObjectId, ref: "Category", required: true },
+    features: [featureSchema],
     imageLink: { type: String, required: true },
     price: { type: Number, required: true, min: 0 },
     offPrice: { type: Number, required: true, min: 0 },
