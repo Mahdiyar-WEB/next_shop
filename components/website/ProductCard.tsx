@@ -43,7 +43,7 @@ const ProductCard = ({ product }: Props) => {
         )}
         {/* Discount */}
         {counts < 3 && (
-          <p className="absolute left-2 top-2 rounded-lg px-2 py-1 text-[13px] font-semibold shadow-sm flex gap-1 text-white bg-error">
+          <p className="absolute left-2 top-2 rounded-lg px-2 py-1 text-[11px] font-semibold shadow-sm flex gap-1 text-white bg-error">
             <span>فقط</span>
             <span>{toPersianDigits(counts)}</span>
             <span>عدد در انبار</span>
