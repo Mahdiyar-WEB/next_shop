@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { productServices } from "services/product-services";
-import ProductsContainer from "./_components/ProductsContainer";
+import ProductsContainer from "components/website/ProductsContainer";
 
 export const metadata: Metadata = {
   title: "خانه",
