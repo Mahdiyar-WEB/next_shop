@@ -8,7 +8,9 @@ export const productServices = {
       `/api/products${query ? `?${query}` : ""}`,
     ),
   getBySlug: (slug: string) =>
-    apiClient.get<{ product: unknown }>(`/api/products/slug/${slug}`),
+    apiClient.get<{ product: Product & { isBookmarked: boolean } }>(
+      `/api/products/slug/${slug}`,
+    ),
   like: (id: string) =>
     apiClient.post<{ isLiked: boolean }>(`/api/products/${id}/like`),
   create: (data: unknown) => adminServices.create("products", data),
