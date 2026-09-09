@@ -74,7 +74,7 @@ const SearchBox = ({
         value={search}
         onChange={(e) => setSearch(e.target.value)}
         placeholder={placeholder || "جستجو در محصولات"}
-        className={`w-full bg-white/70 border outline-none border-none ${inputClassName}`}
+        className={`w-full bg-white/0 border outline-none border-none ${inputClassName}`}
       />
 
       <div className="flex items-center gap-2">
