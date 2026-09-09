@@ -117,7 +117,7 @@ const ProductsCarousel = ({ products }: Props) => {
         dir="rtl"
       >
         {products.map((product) => (
-          <ProductCard key={product._id} product={product} />
+          <ProductCard variant="slider" key={product._id} product={product} />
         ))}
       </div>
 
