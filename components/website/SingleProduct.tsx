@@ -158,7 +158,7 @@ const SingleProduct = ({ product }: Props) => {
         <hr className="text-secondary-100 mb-2" />
         {/* tags */}
         <h4 className="grid col-span-2 text-lg font-semibold">برچسب‌ها</h4>
-        <div className="flex gap-1 mb-4">
+        <div className="flex gap-1.5 mb-4">
           {product.tags.map((tag, index) => {
             return (
               <Link
