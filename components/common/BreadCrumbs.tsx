@@ -14,6 +14,9 @@ const labels = {
   comments: "نظرات",
   users: "کاربران",
   categories: "دسته‌بندی‌ها",
+  mobile: "موبایل",
+  laptop: "لپ‌تاپ",
+  accessories: "لوازم‌جانبی",
 };
 
 const BreadCrumbs = ({ slugTitle = "" }) => {
@@ -37,7 +40,7 @@ const BreadCrumbs = ({ slugTitle = "" }) => {
         </li>
 
         {segments.map((segment, index) => {
-          if (segment === "product") {
+          if (segment === "product" || segment === "categories") {
             return null;
           }
           const href = `/${segments.slice(0, index + 1).join("/")}`;
