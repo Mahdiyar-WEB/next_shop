@@ -15,7 +15,7 @@ const MobileSearch = () => {
     <div className="sticky bottom-6 w-fit mx-auto lg:hidden">
       {isMobile && (
         <SearchBox
-          className="flex w-72 rounded-xl px-3 shadow-lg border border-secondary-50 duration-150 focus-within:border-primary-500 focus-within:shadow-primary-100"
+          className="flex w-72 rounded-xl px-3 shadow-lg border bg-white border-secondary-50 duration-150 focus-within:border-primary-500 focus-within:shadow-primary-100"
           inputClassName="text-sm py-3"
         />
       )}
