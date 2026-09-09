@@ -49,7 +49,7 @@ const RootLayoutHeader = () => {
             <div className="hidden lg:flex">
               {isDesktop && (
                 <SearchBox
-                  className="flex border border-secondary-100 rounded-xl px-2 w-96 duration-150 focus-within:border-primary-500 focus-within:shadow-md focus-within:shadow-primary-100"
+                  className="flex border border-secondary-100 bg-white/50 rounded-xl px-2 w-96 duration-150 focus-within:border-primary-500 focus-within:shadow-md focus-within:shadow-primary-100"
                   inputClassName="text-sm py-2"
                 />
               )}
