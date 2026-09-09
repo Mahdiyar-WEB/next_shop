@@ -25,9 +25,21 @@ export default async function Home() {
 
   return (
     <main className="text-center">
-      <ProductsContainer title="موبایل" products={mobiles.products} />
-      <ProductsContainer title="لپ تاپ" products={laptops.products} />
-      <ProductsContainer title="لوازم جانبی" products={accessories.products} />
+      <ProductsContainer
+        categoryPath="mobile"
+        title="موبایل"
+        products={mobiles.products}
+      />
+      <ProductsContainer
+        categoryPath="laptop"
+        title="لپ تاپ"
+        products={laptops.products}
+      />
+      <ProductsContainer
+        categoryPath="accessories"
+        title="لوازم جانبی"
+        products={accessories.products}
+      />
     </main>
   );
 }
