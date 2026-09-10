@@ -24,7 +24,7 @@ export default async function Home() {
   const { accessories, laptops, mobiles } = await fetchProducts();
 
   return (
-    <main className="text-center">
+    <main className="mx-auto mb-10 w-full sm:w-[95%] 2xl:max-w-screen-2xl px-2 sm:px-0">
       <ProductsContainer
         categoryPath="mobile"
         title="موبایل"
