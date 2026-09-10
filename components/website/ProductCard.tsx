@@ -66,7 +66,7 @@ const ProductCard = ({ product, variant = "slider" }: Props) => {
 
       <div className={`flex flex-1 flex-col ${isGrid ? "px-2 pb-2" : ""}`}>
         {/* Title */}
-        <h3 className="line-clamp-2 min-h-11 text-xs font-medium leading-6 text-secondary-900 transition-colors group-hover:text-primary-600 sm:text-sm">
+        <h3 className="line-clamp-2 min-h-11 text-center text-xs font-medium leading-6 text-secondary-900 transition-colors group-hover:text-primary-600 sm:text-sm">
           {truncateText(product.title, 30)}
         </h3>
 
