@@ -19,9 +19,9 @@ const CategorySlug = async ({
   const { products } = await productServices.getAll(
     `category=${categorySlug}&${queryString.stringify(searchOptions)}`,
   );
-  
+
   return (
-    <main className="mx-auto mb-10 w-full overflow-hidden 2xl:max-w-screen-2xl">
+    <main className="mx-auto mb-10 w-full sm:w-[95%] 2xl:max-w-screen-2xl px-2 sm:px-0 overflow-hidden">
       <BreadCrumbs />
       {/* sort */}
       <ProductsSort />
@@ -30,7 +30,7 @@ const CategorySlug = async ({
         {products.map((product) => (
           <div
             key={product._id}
-            className="col-span-12 sm:col-span-6 lg:col-span-2 "
+            className="col-span-6 md:col-span-4 lg:col-span-3 xl:col-span-2"
           >
             <ProductCard product={product} variant="grid" />
           </div>
