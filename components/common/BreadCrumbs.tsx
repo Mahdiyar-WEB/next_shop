@@ -40,7 +40,7 @@ const BreadCrumbs = ({ slugTitle = "" }) => {
         </li>
 
         {segments.map((segment, index) => {
-          if (segment === "product" || segment === "categories") {
+          if (segment === "product") {
             return null;
           }
           const href = `/${segments.slice(0, index + 1).join("/")}`;
@@ -57,10 +57,10 @@ const BreadCrumbs = ({ slugTitle = "" }) => {
             <li key={href} className="flex items-center gap-2">
               <span>/</span>
 
-              {isLast ? (
+              {isLast || segment === "categories" ? (
                 <span
                   aria-current="page"
-                  className="font-semibold text-secondary-600"
+                  className={`text-secondary-600 ${isLast && 'font-semibold'}`}
                 >
                   {label}
                 </span>
