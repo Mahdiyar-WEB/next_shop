@@ -25,13 +25,15 @@ export async function GET(request: Request) {
     const sort: Record<string, 1 | -1> =
       sortValue === "latest"
         ? { createdAt: -1 }
-        : sortValue === "popular"
-          ? { likes: -1 }
-          : sortValue === "price_asc"
-            ? { offPrice: 1 }
-            : sortValue === "price_desc"
-              ? { offPrice: -1 }
-              : { createdAt: -1 };
+        : sortValue === "earliest"
+          ? { createdAt: 1 }
+          : sortValue === "popular"
+            ? { rating: -1 }
+            : sortValue === "price_asc"
+              ? { offPrice: 1 }
+              : sortValue === "price_desc"
+                ? { offPrice: -1 }
+                : { createdAt: -1 };
     const [products, totalItems, user] = await Promise.all([
       Product.find(filter)
         .populate("category", "title englishTitle")
