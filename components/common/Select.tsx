@@ -33,7 +33,7 @@ const Select = ({ value, onChange, options }: Props) => {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="w-full h-full px-3 text-left text-sm rounded-md text-secondary-500 bg-white flex justify-between items-center"
+        className="w-full h-full px-3 text-left text-sm rounded-md text-secondary-500 bg-white flex justify-between items-center cursor-pointer"
       >
         <span className="flex gap-3 items-center font-medium text-xs md:text-sm">
           <SortIcon />  
