@@ -20,10 +20,10 @@ const ProductCard = ({ product, variant = "slider" }: Props) => {
     <Link
       href={`/product/${product.slug}`}
       draggable={false}
-      className={`group flex h-full flex-col overflow-hidden border border-secondary-100 bg-white transition-all duration-300 ${
+      className={`group flex h-full flex-col overflow-hidden bg-white transition-all duration-300 ${
         isGrid
-          ? "w-full rounded-none"
-          : "w-43 shrink-0 rounded-2xl hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)] sm:w-50 md:w-55"
+          ? "w-full"
+          : "w-43 shrink-0 rounded-2xl border border-secondary-100 sm:w-50 md:w-55 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)]"
       }`}
     >
       {/* Product Image */}
@@ -73,7 +73,7 @@ const ProductCard = ({ product, variant = "slider" }: Props) => {
         {/* Bottom Section */}
         <div
           className={`mt-auto flex flex-col items-end justify-end gap-1 ${
-            isGrid ? "pt-2" : "p-3 pt-2 sm:p-3.5 sm:pt-2 md:p-4 md:pt-2"
+            isGrid ? "p-2" : "p-3 pt-2 sm:p-3.5 sm:pt-2 md:p-4 md:pt-2"
           }`}
         >
           <div className="flex w-full items-center justify-between">
