@@ -4,7 +4,7 @@ import { apiClient } from "./client";
 
 export const productServices = {
   getAll: (query = "") =>
-    apiClient.get<{ products: Product[]; pagination: unknown }>(
+    apiClient.get<{ products: Product[]; pagination: unknown; tags: string[] }>(
       `/api/products${query ? `?${query}` : ""}`,
     ),
   getBySlug: (slug: string) =>
