@@ -4,6 +4,7 @@ import ProductCard from "components/website/ProductCard";
 import { productServices } from "services/product-services";
 import queryString from "query-string";
 import ProductTag from "components/website/ProductTag";
+import Pagination from "components/common/Pagination";
 
 export const instant = false;
 
@@ -16,7 +17,7 @@ const CategorySlug = async ({
 }) => {
   const { categorySlug } = await params;
   const searchOptions = await searchParams;
-  const { products, tags } = await productServices.getAll(
+  const { products, tags, pagination } = await productServices.getAll(
     `category=${categorySlug}&${queryString.stringify(searchOptions)}`,
   );
 
@@ -43,7 +44,7 @@ const CategorySlug = async ({
         </div>
       </div>
       {/* product container */}
-      <div className="grid grid-cols-12 overflow-hidden border-l border-t border-secondary-100">
+      <div className="grid grid-cols-12 overflow-hidden border-l border-t border-secondary-100 mb-10">
         {products.map((product) => (
           <div
             key={product._id}
@@ -53,6 +54,7 @@ const CategorySlug = async ({
           </div>
         ))}
       </div>
+      <Pagination totalPages={pagination.totalPages} />
     </main>
   );
 };
