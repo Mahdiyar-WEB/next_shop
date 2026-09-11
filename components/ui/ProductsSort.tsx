@@ -43,7 +43,7 @@ const ProductsSort = ({ className }: { className?: string }) => {
 
   return (
     <div
-      className={`h-11 w-full md:w-1/5 flex mb-5 justify-between bg-white border border-gray-300 rounded-lg shadow-sm ${className}`}
+      className={`h-11 w-full md:w-2/5 xl:w-1/5 flex justify-between bg-white border border-gray-300 rounded-lg shadow-sm ${className}`}
     >
       <Select
         onChange={(e) => {
