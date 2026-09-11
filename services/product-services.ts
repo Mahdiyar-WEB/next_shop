@@ -4,9 +4,17 @@ import { apiClient } from "./client";
 
 export const productServices = {
   getAll: (query = "") =>
-    apiClient.get<{ products: Product[]; pagination: unknown; tags: string[] }>(
-      `/api/products${query ? `?${query}` : ""}`,
-    ),
+    apiClient.get<{
+      products: Product[];
+      pagination: {
+        page: number;
+        limit: number;
+        totalItems: number;
+        totalPages: number;
+        hasNextPage: boolean;
+      };
+      tags: string[];
+    }>(`/api/products${query ? `?${query}` : ""}`),
   getBySlug: (slug: string) =>
     apiClient.get<{ product: Product & { isBookmarked: boolean } }>(
       `/api/products/slug/${slug}`,
