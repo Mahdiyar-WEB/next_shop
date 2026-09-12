@@ -6,8 +6,40 @@ import queryString from "query-string";
 import ProductTag from "components/website/ProductTag";
 import Pagination from "components/common/Pagination";
 import ToggleCategories from "components/website/ToggleCategories";
+import { Metadata } from "next";
 
 export const instant = false;
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ categorySlug: "mobile" | "laptop" | "accessories" }>;
+}): Promise<Metadata> {
+  const categoriesMetadata = {
+    mobile: {
+      title: "موبایل",
+      description: "محصولات موبایل تمامی برندها با بهترین گارانتی",
+    },
+    laptop: {
+      title: "لپ‌تاپ",
+      description: "بهترین برندهای لپ‌تاپ با نازل ترین قیمت",
+    },
+    accessories: {
+      title: "لوازم‌جانبی",
+      description:
+        "لوازم‌جانبی لپ‌تاپ و موبایل با بهترین کیفیت و دارای گارانتی",
+    },
+  };
+
+  const { categorySlug } = await params;
+
+  return (
+    categoriesMetadata[categorySlug] || {
+      title: "دسته‌بندی",
+      description: "توضیحات دسته بندی",
+    }
+  );
+}
 
 const CategorySlug = async ({
   params,
