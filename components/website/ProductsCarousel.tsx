@@ -127,7 +127,7 @@ const ProductsCarousel = ({ products }: Props) => {
           type="button"
           onClick={() => scroll("right")}
           aria-label="محصولات قبلی"
-          className="absolute right-2 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white text-secondary-700 shadow-lg transition-all duration-200 hover:scale-105 hover:border-primary-200 hover:text-primary-600 md:flex"
+          className="absolute right-2 top-1/2 cursor-pointer z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white text-secondary-700 shadow-lg transition-all duration-200 hover:scale-105 hover:border-primary-200 hover:text-primary-600 md:flex"
         >
           <ChevronRightIcon fontSize="small" />
         </button>
@@ -139,7 +139,7 @@ const ProductsCarousel = ({ products }: Props) => {
           type="button"
           onClick={() => scroll("left")}
           aria-label="محصولات بعدی"
-          className="absolute left-2 top-1/2 z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white text-secondary-700 shadow-lg transition-all duration-200 hover:scale-105 hover:border-primary-200 hover:text-primary-600 md:flex"
+          className="absolute left-2 top-1/2 cursor-pointer z-10 hidden size-10 -translate-y-1/2 items-center justify-center rounded-full border border-secondary-200 bg-white text-secondary-700 shadow-lg transition-all duration-200 hover:scale-105 hover:border-primary-200 hover:text-primary-600 md:flex"
         >
           <ChevronLeftIcon fontSize="small" />
         </button>
