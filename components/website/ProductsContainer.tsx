@@ -2,6 +2,7 @@ import React from "react";
 import { Product } from "types/productType";
 import ProductsCarousel from "./ProductsCarousel";
 import Link from "next/link";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 type Props = {
   products: Product[];
@@ -22,9 +23,10 @@ const ProductsContainer = ({ products, title, categoryPath }: Props) => {
 
         <Link
           href={`/categories/${categoryPath}`}
-          className="text-xs font-medium text-primary-600 transition-colors hover:text-primary-700 sm:text-sm"
+          className="text-xs font-medium transition-colors hover:text-primary-800 sm:text-sm"
         >
           مشاهده همه
+          <ChevronLeftIcon />
         </Link>
       </div>
 
