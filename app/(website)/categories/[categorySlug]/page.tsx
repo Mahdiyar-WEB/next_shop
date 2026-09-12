@@ -5,6 +5,7 @@ import { productServices } from "services/product-services";
 import queryString from "query-string";
 import ProductTag from "components/website/ProductTag";
 import Pagination from "components/common/Pagination";
+import ToggleCategories from "components/website/ToggleCategories";
 
 export const instant = false;
 
@@ -24,10 +25,10 @@ const CategorySlug = async ({
   return (
     <main className="mx-auto mb-10 w-full sm:w-[95%] 2xl:max-w-screen-2xl px-2 sm:px-0 overflow-hidden">
       <BreadCrumbs />
+      <ToggleCategories />
       <div className="flex flex-col xl:flex-row xl:items-center pb-5 gap-5">
         {/* sort */}
         <ProductsSort />
-
         {/* tags */}
         <div className="flex flex-col xl:flex-row xl:items-center gap-2">
           <h2 className="text-sm text-nowrap font-semibold text-slate-800">
@@ -44,11 +45,11 @@ const CategorySlug = async ({
         </div>
       </div>
       {/* product container */}
-      <div className="grid grid-cols-12 overflow-hidden border-l border-t border-secondary-100 mb-10">
+      <div className="mb-10 grid grid-cols-12 overflow-hidden pt-px pr-px">
         {products.map((product) => (
           <div
             key={product._id}
-            className="col-span-6 border-b border-r border-secondary-100 md:col-span-4 lg:col-span-3 xl:col-span-2"
+            className="col-span-6 -mt-px -mr-px border border-secondary-100 md:col-span-4 lg:col-span-3 xl:col-span-2"
           >
             <ProductCard product={product} variant="grid" />
           </div>
