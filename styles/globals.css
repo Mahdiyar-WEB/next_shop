@@ -49,6 +49,18 @@
   @apply px-4 py-3 bg-primary-900 text-white hover:bg-primary-800 shadow-lg;
 }
 
+@utility btn--secondary {
+  @apply px-4 py-3 bg-gray-100 text-gray-900 hover:bg-gray-200 shadow-lg;
+}
+
+@utility btn--outline {
+  @apply px-4 py-3 border border-primary-900 text-primary-900 hover:bg-primary-900 hover:text-white shadow-lg;
+}
+
+@utility btn--danger {
+  @apply px-4 py-3 bg-red-600 text-white hover:bg-red-700 shadow-lg;
+}
+
 @utility table__th {
   @apply p-3 pr-8 text-right font-medium border-b-2 border-b-gray-500;
 }
