@@ -15,6 +15,7 @@ import toPersianDigits from "utils/toPersianDigits";
 import formatPrice from "utils/formatPrice";
 import Badge from "components/common/Badge";
 import Link from "next/link";
+import { useAddToCart } from "hooks/use-cart";
 
 type Props = {
   product: Product & { isBookmarked: boolean };
@@ -25,9 +26,10 @@ const SingleProduct = ({ product }: Props) => {
     product.isBookmarked,
   );
   const { mutateAsync: likeProduct } = useLikeProduct();
-  const { user } = useUserStore();
+  const { mutateAsync: addToCart } = useAddToCart();
+  const { user, setUser } = useUserStore();
 
-  const handleLike = () => {
+  const handleBookmark = () => {
     if (!user) {
       toast.error("ابتدار وارد حساب خود شوید");
       return;
@@ -58,9 +60,23 @@ const SingleProduct = ({ product }: Props) => {
     toast.success("لینک محصول کپی شد");
   };
 
-  const hasDiscount = !!product.discount;
+  const handleAddToCart = () => {
+    if (!user) {
+      toast.error("ابتدار وارد حساب خود شوید");
+      return;
+    }
+    addToCart(product._id, {
+      onSuccess: (data) => {
+        setUser(data.user);
+        toast.success("محصول به سبد خرید اضافه شد");
+      },
+      onError: () => {
+        toast.error("خطا در اجرای درخواست");
+      },
+    });
+  };
 
-  console.log("🚀 ~ SingleProduct ~ product:", product);
+  const hasDiscount = !!product.discount;
 
   return (
     <section className="flex">
@@ -82,7 +98,7 @@ const SingleProduct = ({ product }: Props) => {
           describeChild
           title="ذخیره محصول"
         >
-          <Button onClick={handleLike} variant="outline" className="p-0">
+          <Button onClick={handleBookmark} variant="outline" className="p-0">
             {isBookmarked ? (
               <BookmarkIcon className="size-6! text-primary-900" />
             ) : (
@@ -154,7 +170,9 @@ const SingleProduct = ({ product }: Props) => {
         {/* title */}
         <h2 className="font-bold text-2xl">{product.title}</h2>
         {/* description */}
-        <h3 className="text-secondary-400 text-sm mb-2">{product.description}</h3>
+        <h3 className="text-secondary-400 text-sm mb-2">
+          {product.description}
+        </h3>
         <hr className="text-secondary-100 mb-2" />
         {/* tags */}
         <h4 className="grid col-span-2 text-lg font-semibold">برچسب‌ها</h4>
@@ -231,7 +249,9 @@ const SingleProduct = ({ product }: Props) => {
           </p>
         )}
         {/* add to cart button */}
-        <Button className="mt-auto">افزودن به سبد خرید</Button>
+        <Button onClick={handleAddToCart} className="mt-auto">
+          افزودن به سبد خرید
+        </Button>
       </div>
     </section>
   );
