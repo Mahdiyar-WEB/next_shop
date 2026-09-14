@@ -13,9 +13,11 @@ import Link from "next/link";
 import { useUserStore } from "stores/user-store";
 import SearchBox from "../common/SearchBox";
 import { User } from "types/userType";
+import toPersianDigits from "utils/toPersianDigits";
 
 const RootLayoutHeader = () => {
   const { user, isLoading } = useUserStore();
+
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
     const handleResize = () => setIsDesktop(window.innerWidth > 1024);
@@ -23,6 +25,10 @@ const RootLayoutHeader = () => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  const cartItems = user?.cart.products.reduce((accumulator, currentValue) => {
+    return currentValue.quantity + accumulator;
+  }, 0);
 
   return (
     <header className="sticky top-0 z-50 ">
@@ -74,8 +80,9 @@ const RootLayoutHeader = () => {
             )}
             <Link
               href="/cart"
-              className="ps-3 md:ps-5 text-secondary-900 ms-1 md:ms-3 border-r border-secondary-50"
+              className="ps-3 relative md:ps-5 text-secondary-900 ms-1 md:ms-3 border-r border-secondary-50"
             >
+              {!!cartItems && <span className="absolute -top-3 right-1 w-6 h-6 flex items-center justify-center rounded-full bg-error text-white text-xs">{toPersianDigits(cartItems)}</span>}
               <ShoppingCartOutlinedIcon className="h-6.5! w-6.5!" />
             </Link>
           </div>
