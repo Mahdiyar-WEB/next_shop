@@ -1,13 +1,14 @@
+import { Cart, User } from "types/userType";
 import { apiClient } from "./client";
 
 export const cartServices = {
-  get: () => apiClient.get<{ cart: unknown }>("/api/cart"),
+  get: () => apiClient.get<{ cart: Cart }>("/api/cart"),
   addProduct: (productId: string) =>
-    apiClient.post<{ cart: unknown }>("/api/cart", { productId }),
+    apiClient.post<{ cart: Cart; user: User }>("/api/cart", { productId }),
   applyCoupon: (couponCode: string) =>
-    apiClient.post<{ cart: unknown }>("/api/cart", { couponCode }),
+    apiClient.post<{ cart: Cart }>("/api/cart", { couponCode }),
   removeProduct: (productId: string) =>
-    apiClient.delete<{ cart: unknown }>("/api/cart", { productId }),
+    apiClient.delete<{ cart: Cart }>("/api/cart", { productId }),
   removeCoupon: () =>
-    apiClient.delete<{ cart: unknown }>("/api/cart", { removeCoupon: true }),
+    apiClient.delete<{ cart: Cart }>("/api/cart", { removeCoupon: true }),
 };

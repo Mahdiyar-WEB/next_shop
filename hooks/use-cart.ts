@@ -5,8 +5,11 @@ import { queryKeys } from "./query-keys";
 export function useCart() {
   return useQuery({ queryKey: queryKeys.cart, queryFn: cartServices.get });
 }
-export function useCartMutation<T>(mutationFn: (input: T) => Promise<unknown>) {
+export function useCartMutation<TData, TVariables>(
+  mutationFn: (input: TVariables) => Promise<TData>,
+) {
   const client = useQueryClient();
+
   return useMutation({
     mutationFn,
     onSuccess: () => client.invalidateQueries({ queryKey: queryKeys.cart }),
