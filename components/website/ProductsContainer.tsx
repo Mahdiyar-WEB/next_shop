@@ -12,7 +12,7 @@ type Props = {
 
 const ProductsContainer = ({ products, title, categoryPath }: Props) => {
   return (
-    <section className="mx-auto mb-10 w-full overflow-hidden rounded-2xl bg-white px-4 py-5 sm:px-6 sm:py-6 xl:max-w-7xl">
+    <section className="mx-auto mb-10 w-full overflow-hidden rounded-2xl bg-white px-4 py-5 sm:px-6 sm:py-6">
       {/* Header */}
       <div className="mb-5 flex items-center justify-between sm:mb-6">
         <h2 className="relative pr-3 text-base font-bold text-secondary-950 sm:text-lg md:text-xl">
