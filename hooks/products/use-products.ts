@@ -5,7 +5,7 @@ import { queryKeys } from "../query-keys";
 export function useProducts(query = "") {
   return useQuery({
     queryKey: queryKeys.products(query),
-    queryFn: () => productServices.getAll(query),
+    queryFn: ({ signal }) => productServices.getAll(query, signal),
     staleTime: 60_000,
   });
 }

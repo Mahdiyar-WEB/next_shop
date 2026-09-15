@@ -3,7 +3,7 @@ import { adminServices } from "./admin-services";
 import { apiClient } from "./client";
 
 export const productServices = {
-  getAll: (query = "") =>
+  getAll: (query = "", signal?: AbortSignal) =>
     apiClient.get<{
       products: Product[];
       pagination: {
@@ -14,7 +14,7 @@ export const productServices = {
         hasNextPage: boolean;
       };
       tags: string[];
-    }>(`/api/products${query ? `?${query}` : ""}`),
+    }>(`/api/products${query ? `?${query}` : ""}`, signal),
   getBySlug: (slug: string) =>
     apiClient.get<{ product: Product & { isBookmarked: boolean } }>(
       `/api/products/slug/${slug}`,
