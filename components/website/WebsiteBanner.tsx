@@ -22,6 +22,7 @@ const WebsiteBanner = ({
       {/* Background Image - Clean and Crisp */}
       <Image
         src={image}
+        unoptimized
         alt={alt || text}
         fill
         priority
