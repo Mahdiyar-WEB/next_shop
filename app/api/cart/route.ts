@@ -22,45 +22,81 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   try {
     const user = await currentUser(request as never);
+
     await connectToDatabase();
+
     const { productId, couponCode } = await body<{
       productId?: string;
       couponCode?: string;
     }>(request as never);
+
     const userCart = user.get("cart") as {
-      products: Array<{ productId: { toString(): string }; quantity: number }>;
+      products: Array<{
+        productId: { toString(): string };
+        quantity: number;
+      }>;
       coupon?: unknown;
     };
+
     if (couponCode) {
       const coupon = await Coupon.findOne({
         code: couponCode.toUpperCase(),
         isActive: true,
       });
+
       if (
         !coupon ||
         coupon.usageCount >= coupon.usageLimit ||
         (coupon.expireDate && coupon.expireDate < new Date())
-      )
+      ) {
         throw new ApiError(400, "کد تخفیف معتبر نیست");
+      }
+
       user.set("cart.coupon", coupon._id);
     } else {
-      if (!productId) throw new ApiError(400, "شناسه محصول الزامی است");
-      const id = objectId(productId),
-        product = await Product.findById(id);
-      if (!product || product.countInStock < 1)
-        throw new ApiError(400, "محصول قابل خرید نیست");
+      if (!productId) {
+        throw new ApiError(400, "شناسه محصول الزامی است");
+      }
+
+      const id = objectId(productId);
+
+      const product = await Product.findById(id);
+
+      if (!product) {
+        throw new ApiError(404, "محصول یافت نشد");
+      }
+
       const item = userCart.products.find(
         (value) => value.productId.toString() === id,
       );
-      if (item) item.quantity += 1;
-      else
+
+      if (item) {
+        if (item.quantity >= product.countInStock) {
+          throw new ApiError(400, "موجودی محصول کافی نیست");
+        }
+
+        item.quantity += 1;
+      } else {
+        if (product.countInStock < 1) {
+          throw new ApiError(400, "محصول قابل خرید نیست");
+        }
+
         user.set("cart.products", [
           ...userCart.products,
-          { productId: id, quantity: 1 },
+          {
+            productId: id,
+            quantity: 1,
+          },
         ]);
+      }
     }
+
     await user.save();
-    return ok({ cart: await cart(user), user: user });
+
+    return ok({
+      cart: await cart(user),
+      user,
+    });
   } catch (error) {
     return fail(error);
   }
