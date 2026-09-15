@@ -40,9 +40,9 @@ const SingleProduct = ({ product }: Props) => {
       onSuccess: () => {
         toast.success("پست ذخیره شده");
       },
-      onError: () => {
+      onError: (error) => {
         setIsBookmarked(!action);
-        toast.error("خطا در اجرای درخواست");
+        toast.error(error.message);
       },
     });
   };
@@ -70,8 +70,8 @@ const SingleProduct = ({ product }: Props) => {
         setUser(data.user);
         toast.success("محصول به سبد خرید اضافه شد");
       },
-      onError: () => {
-        toast.error("خطا در اجرای درخواست");
+      onError: (error) => {
+        toast.error(error.message);
       },
     });
   };
