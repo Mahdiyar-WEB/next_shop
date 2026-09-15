@@ -33,11 +33,14 @@ async function request<T>(
     headers.set("Content-Type", "application/json");
   }
 
-  const response = await fetch(process.env.NEXT_PUBLIC_BASE_URL + path, {
-    ...init,
-    headers,
-    credentials: "include",
-  });
+  const response = await fetch(
+    process.env.NEXT_PUBLIC_BASE_URL + path,
+    {
+      ...init,
+      headers,
+      credentials: "include",
+    },
+  );
 
   const payload = (await response.json().catch(() => ({}))) as ApiEnvelope<T>;
 
@@ -75,7 +78,10 @@ async function request<T>(
 }
 
 export const apiClient = {
-  get: <T>(path: string) => request<T>(path),
+  get: <T>(path: string, signal?: AbortSignal) =>
+    request<T>(path, {
+      signal,
+    }),
 
   post: <T>(path: string, data?: unknown) =>
     request<T>(path, {
