@@ -23,7 +23,7 @@ const ProductsContainer = ({ products, title, categoryPath }: Props) => {
 
         <Link
           href={`/categories/${categoryPath}`}
-          className="text-xs font-medium transition-colors hover:text-primary-800 sm:text-sm"
+          className="text-xs font-medium transition-colors text-secondary-600 hover:text-primary-800 sm:text-sm"
         >
           مشاهده همه
           <ChevronLeftIcon />
