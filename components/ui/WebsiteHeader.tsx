@@ -82,7 +82,11 @@ const RootLayoutHeader = () => {
               href="/cart"
               className="ps-3 relative md:ps-5 text-secondary-900 ms-1 md:ms-3 border-r border-secondary-50"
             >
-              {!!cartItems && <span className="absolute -top-3 right-1 w-6 h-6 flex items-center justify-center rounded-full bg-error text-white text-xs">{toPersianDigits(cartItems)}</span>}
+              {!!cartItems && (
+                <span className="absolute -top-3 right-1 w-6 h-6 flex items-center justify-center rounded-full bg-error text-white text-xs">
+                  {toPersianDigits(cartItems)}
+                </span>
+              )}
               <ShoppingCartOutlinedIcon className="h-6.5! w-6.5!" />
             </Link>
           </div>
@@ -140,10 +144,10 @@ const ProfileMenu = ({ user }: { user: User }) => {
       >
         <MenuItem onClick={handleClose} sx={{ padding: 0 }} divider>
           <Link
-            href={user.role === "ADMIN" ? "/admin" : "/dashboard"}
+            href="/dashboard"
             className="w-full flex items-center justify-between py-4 px-2.5"
           >
-            {user.role === "ADMIN" ? "پنل ادمین" : "پنل کاربری"}
+            پنل کاربری
             <ArrowBackIosNewIcon sx={{ height: 16, width: 16 }} />
           </Link>
         </MenuItem>

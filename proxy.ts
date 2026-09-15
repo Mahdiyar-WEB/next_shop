@@ -9,11 +9,7 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
-  if (pathname.startsWith("/admin") && (!user || user.role !== "ADMIN")) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  if (pathname.startsWith("/dashboard") && (!user || user.role !== "USER")) {
+  if (pathname.startsWith("/dashboard") && !user) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

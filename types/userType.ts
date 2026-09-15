@@ -1,11 +1,11 @@
-type UserRole = "USER" | "ADMIN" | "WRITER" | "TEACHER";
+type UserRole = "USER";
 
 interface CartProduct {
   product: string;
   quantity: number;
 }
 
-interface Cart {
+export interface Cart {
   products: CartProduct[];
   coupon: string | null;
 }
