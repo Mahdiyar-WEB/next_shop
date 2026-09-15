@@ -18,7 +18,7 @@ const WebsiteBanner = ({
   badgeText = "فروشگاه ویرا",
 }: Props) => {
   return (
-    <section className="relative aspect-[1000/380] sm:aspect-[1000/450] lg:aspect-[2032/428] w-full overflow-hidden rounded-2xl md:rounded-3xl border border-gray-100/80 shadow-sm">
+    <section className="relative aspect-1000/380 sm:aspect-1000/450 lg:aspect-2032/428 w-full overflow-hidden rounded-2xl md:rounded-3xl border border-gray-100/80 shadow-sm">
       {/* Background Image - Clean and Crisp */}
       <Image
         src={image}

@@ -39,6 +39,7 @@ export default async function Home() {
       <WebsiteBanner
         image="/laptop_banner.jpg"
         alt="laptop_banner"
+        href="/categories/laptop"
         text="قدرت و سرعت را با لپ‌تاپ‌های جدید تجربه کنید"
       />
 
@@ -50,6 +51,7 @@ export default async function Home() {
       <WebsiteBanner
         image="/accessories_banner.jpg"
         alt="accessories_banner"
+        href="/categories/accessories"
         text="اکسسوری‌های حرفه‌ای، برای تکمیل تجربه دیجیتال شما"
       />
       <ProductsContainer
