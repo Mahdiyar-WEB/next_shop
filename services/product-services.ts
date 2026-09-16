@@ -6,6 +6,7 @@ export const productServices = {
   getAll: (query = "", signal?: AbortSignal) =>
     apiClient.get<{
       products: Product[];
+      similarProducts: Product[];
       pagination: {
         page: number;
         limit: number;
