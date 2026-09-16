@@ -9,6 +9,7 @@ export async function GET(request: Request) {
     const url = new URL(request.url);
 
     const page = Math.max(1, Number(url.searchParams.get("page")) || 1);
+
     const limit = Math.min(
       100,
       Math.max(1, Number(url.searchParams.get("limit")) || 12),
@@ -22,12 +23,17 @@ export async function GET(request: Request) {
     const sortValue = url.searchParams.get("sort");
 
     if (search) {
-      filter.$text = { $search: search };
+      filter.$text = {
+        $search: search,
+      };
     }
 
     if (tags) {
       const tagList = tags.split(",").filter(Boolean);
-      filter.tags = { $in: tagList };
+
+      filter.tags = {
+        $in: tagList,
+      };
     }
 
     let categoryIds: unknown[] = [];
@@ -36,10 +42,14 @@ export async function GET(request: Request) {
       const slugs = category.split(",").filter(Boolean);
 
       categoryIds = await Category.find({
-        englishTitle: { $in: slugs },
+        englishTitle: {
+          $in: slugs,
+        },
       }).distinct("_id");
 
-      filter.category = { $in: categoryIds };
+      filter.category = {
+        $in: categoryIds,
+      };
     }
 
     const sort: Record<string, 1 | -1> =
@@ -70,18 +80,32 @@ export async function GET(request: Request) {
       Product.aggregate([
         {
           $match: category
-            ? { category: { $in: categoryIds } }
+            ? {
+                category: {
+                  $in: categoryIds,
+                },
+              }
             : {},
         },
-        { $unwind: "$tags" },
+        {
+          $unwind: "$tags",
+        },
         {
           $group: {
             _id: "$tags",
-            count: { $sum: 1 },
+            count: {
+              $sum: 1,
+            },
           },
         },
-        { $sort: { count: -1 } },
-        { $limit: 10 },
+        {
+          $sort: {
+            count: -1,
+          },
+        },
+        {
+          $limit: 10,
+        },
         {
           $project: {
             _id: 0,
@@ -91,19 +115,68 @@ export async function GET(request: Request) {
       ]),
     ]);
 
+    let similarProducts: typeof products = [];
+
+    if (search && products.length === 0 && search.trim().length >= 3) {
+      const searchTerms = search.trim().split(/\s+/).filter(Boolean);
+
+      const similarFilter = {
+        $or: [
+          ...searchTerms.map((term) => ({
+            title: {
+              $regex: term,
+              $options: "i",
+            },
+          })),
+
+          ...searchTerms.map((term) => ({
+            slug: {
+              $regex: term,
+              $options: "i",
+            },
+          })),
+
+          ...searchTerms.map((term) => ({
+            brand: {
+              $regex: term,
+              $options: "i",
+            },
+          })),
+        ],
+      };
+
+      similarProducts = await Product.find(similarFilter)
+        .populate("category", "title englishTitle")
+        .sort({
+          rating: -1,
+          createdAt: -1,
+        })
+        .limit(3)
+        .lean();
+    }
+
     const userId = user?._id.toString();
 
-    return ok({
-      products: products.map(({ likes = [], ...product }) => ({
+    const mapProducts = (
+      items: Array<{
+        likes?: Array<{ toString(): string }>;
+        [key: string]: any;
+      }>,
+    ) =>
+      items.map(({ likes = [], ...product }) => ({
         ...product,
         likesCount: likes.length,
+
         isLiked: Boolean(
           userId &&
-            likes.some(
-              (id: { toString(): string }) => id.toString() === userId,
-            ),
+          likes.some((id: { toString(): string }) => id.toString() === userId),
         ),
-      })),
+      }));
+
+    return ok({
+      products: mapProducts(products),
+
+      similarProducts: mapProducts(similarProducts),
 
       tags: tagsResult.map((item) => item.tag),
 
