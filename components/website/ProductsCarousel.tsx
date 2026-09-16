@@ -113,7 +113,7 @@ const ProductsCarousel = ({ products }: Props) => {
         onMouseUp={stopDragging}
         onMouseLeave={stopDragging}
         onClickCapture={handleClickCapture}
-        className="flex gap-3 overflow-x-auto select-none px-4 py-4 scrollbar-hide bg-blue-400 rounded-2xl sm:rounded-3xl sm:gap-3"
+        className="flex gap-3 overflow-x-auto select-none px-4 py-4 scrollbar-hide bg-blue-400/80 rounded-2xl sm:rounded-3xl sm:gap-3"
         dir="rtl"
       >
         {products.map((product) => (
