@@ -17,9 +17,10 @@ export const productServices = {
       tags: string[];
     }>(`/api/products${query ? `?${query}` : ""}`, signal),
   getBySlug: (slug: string) =>
-    apiClient.get<{ product: Product & { isBookmarked: boolean } }>(
-      `/api/products/slug/${slug}`,
-    ),
+    apiClient.get<{
+      product: Product & { isBookmarked: boolean };
+      similarProducts: Product[];
+    }>(`/api/products/slug/${slug}`),
   like: (id: string) =>
     apiClient.post<{ isLiked: boolean }>(`/api/products/${id}/like`),
   create: (data: unknown) => adminServices.create("products", data),
