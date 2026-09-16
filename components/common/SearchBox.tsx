@@ -2,12 +2,19 @@
 
 import { useProducts } from "hooks/products/use-products";
 import Link from "next/link";
-import { SubmitEvent, useEffect, useRef, useState } from "react";
+import {
+  SetStateAction,
+  SubmitEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import formatPrice from "utils/formatPrice";
 import Image from "next/image";
 import toPersianDigits from "utils/toPersianDigits";
+import { Product } from "types/productType";
 
 const DEBOUNCE_DELAY = 1000;
 
@@ -33,6 +40,7 @@ const SearchBox = ({
   );
 
   const products = data?.products || [];
+  const similarProducts = data?.similarProducts || [];
   const isSearching = Boolean(searchQuery) && (isLoading || isFetching);
   const showResults = Boolean(searchQuery);
 
@@ -89,7 +97,7 @@ const SearchBox = ({
       className={`relative ${className}`}
     >
       {showResults && (
-        <div className="absolute bottom-full right-0 mb-2 w-full rounded-2xl bg-white border border-gray-300/80 p-3 shadow-lg md:bottom-auto md:top-full md:mb-0 md:mt-2">
+        <div className="absolute bottom-full right-0 mb-2 w-full rounded-2xl border border-gray-300/80 bg-white p-3 shadow-lg md:bottom-auto md:top-full md:mb-0 md:mt-2">
           {isSearching ? (
             <div className="flex min-h-32 items-center justify-center">
               <span className="text-sm text-secondary-500">
@@ -99,55 +107,34 @@ const SearchBox = ({
           ) : products.length > 0 ? (
             <div className="flex flex-col">
               {products.map((product) => (
-                <Link
+                <SearchProduct
                   key={product._id}
-                  href={`/product/${product.slug}`}
-                  onClick={() => setSearchQuery("")}
-                  className="flex items-center gap-2 rounded-xl p-2.5 transition-colors hover:bg-blue-100/80 md:gap-4 md:p-3"
-                >
-                  <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-secondary-100 md:size-18 md:rounded-xl">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${product.imageLink}`}
-                      alt={product.title}
-                      fill
-                      sizes="72px"
-                      className="object-cover object-center"
-                    />
-                  </div>
-
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-xs font-medium md:text-sm">
-                      {product.title}
-                    </p>
-
-                    <div className="mt-1.5 flex flex-col items-start md:mt-2">
-                      <div className="flex items-center gap-1">
-                        <span className="text-xs font-semibold md:text-sm">
-                          {formatPrice(product.offPrice)}
-                        </span>
-
-                        <span className="text-[10px] text-secondary-400 md:text-[11px]">
-                          تومان
-                        </span>
-                      </div>
-
-                      {product.price > product.offPrice && (
-                        <span className="text-[10px] text-secondary-400 line-through md:text-xs">
-                          {formatPrice(product.price)}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-
-                  <div className="shrink-0">
-                    {product.discount > 0 && (
-                      <span className="rounded-md bg-blue-100 px-1.5 py-1 text-[10px] font-medium text-primary-900 md:px-2 md:text-xs">
-                        {toPersianDigits(product.discount)}٪ تخفیف
-                      </span>
-                    )}
-                  </div>
-                </Link>
+                  product={product}
+                  setSearchQuery={setSearchQuery}
+                />
               ))}
+            </div>
+          ) : similarProducts.length > 0 ? (
+            <div>
+              <div className="mb-3 rounded-xl bg-amber-50 p-3 text-center">
+                <p className="text-sm font-medium text-amber-700">
+                  محصول مورد نظر پیدا نشد!
+                </p>
+              </div>
+              <div className="flex justify-center items-center gap-2 my-3 text-secondary-700">
+                <hr className="flex w-full" />
+                <p className="text-nowrap text-sm font-semibold">محصولات مشابه</p>
+                <hr className="flex w-full" />
+              </div>
+              <div className="flex flex-col">
+                {similarProducts.map((product) => (
+                  <SearchProduct
+                    key={product._id}
+                    product={product}
+                    setSearchQuery={setSearchQuery}
+                  />
+                ))}
+              </div>
             </div>
           ) : (
             <div className="flex min-h-32 items-center justify-center">
@@ -164,7 +151,7 @@ const SearchBox = ({
           type="submit"
           className="order-2 flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-lg bg-primary-900 px-2 text-white transition-colors hover:bg-primary-800 md:h-8.5 md:px-3"
         >
-          <SearchIcon className="size-4!" />
+          <SearchIcon className="size-4! md:size-4.5!" />
           <span className="hidden md:inline text-sm">جستجو</span>
         </button>
 
@@ -192,6 +179,65 @@ const SearchBox = ({
         </div>
       </div>
     </form>
+  );
+};
+
+const SearchProduct = ({
+  product,
+  setSearchQuery,
+}: {
+  product: Product;
+  setSearchQuery: (value: SetStateAction<string>) => void;
+}) => {
+  return (
+    <Link
+      key={product._id}
+      href={`/product/${product.slug}`}
+      onClick={() => setSearchQuery("")}
+      className="flex items-center gap-2 rounded-xl p-2.5 transition-colors hover:bg-blue-100/80 md:gap-4 md:p-3"
+    >
+      <div className="relative size-14 shrink-0 overflow-hidden rounded-lg bg-secondary-100 md:size-18 md:rounded-xl">
+        <Image
+          src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}/${product.imageLink}`}
+          alt={product.title}
+          fill
+          sizes="72px"
+          className="object-cover object-center"
+        />
+      </div>
+
+      <div className="min-w-0 flex-1">
+        <p className="truncate text-xs font-medium md:text-sm">
+          {product.title}
+        </p>
+
+        <div className="mt-1.5 flex flex-col items-start md:mt-2">
+          <div className="flex items-center gap-1">
+            <span className="text-xs font-semibold md:text-sm">
+              {formatPrice(product.offPrice)}
+            </span>
+
+            <span className="text-[10px] text-secondary-400 md:text-[11px]">
+              تومان
+            </span>
+          </div>
+
+          {product.price > product.offPrice && (
+            <span className="text-[10px] text-secondary-400 line-through md:text-xs">
+              {formatPrice(product.price)}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <div className="shrink-0">
+        {product.discount > 0 && (
+          <span className="rounded-md bg-blue-100 px-1.5 py-1 text-[10px] font-medium text-primary-900 md:px-2 md:text-xs">
+            {toPersianDigits(product.discount)}٪ تخفیف
+          </span>
+        )}
+      </div>
+    </Link>
   );
 };
 
