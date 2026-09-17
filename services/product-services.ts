@@ -22,7 +22,9 @@ export const productServices = {
       similarProducts: Product[];
     }>(`/api/products/slug/${slug}`),
   like: (id: string) =>
-    apiClient.post<{ isLiked: boolean }>(`/api/products/${id}/like`),
+    apiClient.post<{ isLiked: boolean; message: string }>(
+      `/api/products/${id}/like`,
+    ),
   create: (data: unknown) => adminServices.create("products", data),
   update: (id: string, data: unknown) =>
     adminServices.update("products", id, data),
