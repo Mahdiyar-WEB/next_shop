@@ -37,8 +37,8 @@ const SingleProduct = ({ product }: Props) => {
     const action = !isBookmarked;
     setIsBookmarked(action);
     likeProduct(product._id, {
-      onSuccess: () => {
-        toast.success("پست ذخیره شده");
+      onSuccess: (data) => {
+        toast.success(data.message);
       },
       onError: (error) => {
         setIsBookmarked(!action);
@@ -80,7 +80,7 @@ const SingleProduct = ({ product }: Props) => {
 
   return (
     <section className="flex">
-      <div className="flex flex-col gap-6 mt-5 py-5 px-2.5 border border-l-0 border-gray-300 rounded-r-lg h-fit ">
+      <div className="flex flex-col gap-4 mt-5 py-5 px-1.5 border border-l-0 border-gray-300 rounded-r-lg h-fit ">
         <Tooltip
           placement="right"
           slotProps={{
@@ -98,7 +98,11 @@ const SingleProduct = ({ product }: Props) => {
           describeChild
           title="ذخیره محصول"
         >
-          <Button onClick={handleBookmark} variant="outline" className="p-0">
+          <Button
+            onClick={handleBookmark}
+            variant="secondary"
+            className="p-1.5 shadow-none bg-transparent"
+          >
             {isBookmarked ? (
               <BookmarkIcon className="size-6! text-primary-900" />
             ) : (
@@ -125,8 +129,12 @@ const SingleProduct = ({ product }: Props) => {
           describeChild
           title="اشتراک گذاری"
         >
-          <Button onClick={handleShare} variant="outline" className="p-0">
-            <ShareOutlinedIcon className="size-6!" />
+          <Button
+            onClick={handleShare}
+            variant="secondary"
+            className="p-1.5 shadow-none bg-transparent"
+          >
+            <ShareOutlinedIcon className="size-6! text-primary-900" />
           </Button>
         </Tooltip>
         <Tooltip
@@ -146,8 +154,12 @@ const SingleProduct = ({ product }: Props) => {
           describeChild
           title="کپی لینک"
         >
-          <Button onClick={handleCopyLink} variant="outline" className="p-0">
-            <LinkIcon className="size-6!" />
+          <Button
+            onClick={handleCopyLink}
+            variant="secondary"
+            className="p-1.5 shadow-none bg-transparent"
+          >
+            <LinkIcon className="size-6! text-primary-900" />
           </Button>
         </Tooltip>
       </div>
