@@ -1,12 +1,20 @@
 type UserRole = "USER";
 
-interface CartProduct {
-  product: string;
+interface CartProductDetails {
+  productId: {
+    _id: string;
+    title: string;
+    slug: string;
+    imageLink: string;
+    price: number;
+    offPrice: number;
+    countInStock: number;
+  };
   quantity: number;
 }
 
 export interface Cart {
-  products: CartProduct[];
+  products: CartProductDetails[];
   coupon: string | null;
 }
 
