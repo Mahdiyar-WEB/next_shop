@@ -1,24 +1,31 @@
 "use client";
 
-import type { Product } from "types/productType";
 import type { CartStepNumber } from "./CartContainer";
 import CartItem from "./CartItem";
 import CartSummary from "./CartSummary";
 import EmptyCart from "./EmptyCart";
-
-type CartProduct = {
-  productId: Product;
-  quantity: number;
-};
+import AddressStep from "./AddressStep";
+import { AddressType } from "types/addressType";
+import { CartProductDetails } from "types/userType";
+import Button from "components/common/Button";
 
 type Props = {
   step: CartStepNumber;
-  products: CartProduct[];
+  products: CartProductDetails[];
+  address: AddressType | null;
+  onAddressSubmit: (values: AddressType) => void;
   onNext: () => void;
   onBack: () => void;
 };
 
-const CartStep = ({ step, products, onNext, onBack }: Props) => {
+const CartStep = ({
+  step,
+  products,
+  address,
+  onAddressSubmit,
+  onNext,
+  onBack,
+}: Props) => {
   if (step === 1) {
     if (!products.length) {
       return <EmptyCart />;
@@ -57,33 +64,47 @@ const CartStep = ({ step, products, onNext, onBack }: Props) => {
 
   if (step === 2) {
     return (
-      <section>
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-sm text-secondary-500"
-        >
-          بازگشت
-        </button>
-      </section>
+      <AddressStep address={address} onNext={onAddressSubmit} onBack={onBack} />
     );
   }
 
   if (step === 3) {
     return (
-      <section>
-        <button
-          type="button"
-          onClick={onBack}
-          className="text-sm text-secondary-500"
-        >
-          بازگشت
-        </button>
+      <section className="rounded-2xl border border-secondary-100 bg-white p-6">
+        <h2 className="text-lg font-bold">تسویه حساب</h2>
+
+        <div className="mt-6 rounded-xl bg-secondary-50 p-4">
+          <p>{address?.province}</p>
+          <p>{address?.city}</p>
+          <p>{address?.street}</p>
+          <p>
+            پلاک {address?.plaque}
+            {" - "}
+            واحد {address?.unit}
+          </p>
+        </div>
+
+        <div className="mt-6 flex justify-between">
+          <Button type="button" variant="outline" onClick={onBack}>
+            بازگشت
+          </Button>
+
+          <Button type="button" onClick={onNext}>
+            ثبت سفارش
+          </Button>
+        </div>
       </section>
     );
   }
+  return (
+    <section className="rounded-2xl border border-secondary-100 bg-white p-10 text-center">
+      <h2 className="text-xl font-bold text-primary-900">
+        سفارش با موفقیت ثبت شد
+      </h2>
 
-  return <section />;
+      <p className="mt-3 text-secondary-500">از خرید شما متشکریم.</p>
+    </section>
+  );
 };
 
 export default CartStep;
