@@ -25,7 +25,7 @@ const schema = yup.object({
     .string()
     .trim()
     .required("خیابان را وارد کنید")
-    .min(2, "خیابان معتبر نیست"),
+    .min(8, "حداقل ۸ حرف وارد کنید"),
   plaque: yup.string().trim().required("پلاک را وارد کنید"),
   unit: yup.string().trim().required("واحد را وارد کنید"),
 });
@@ -38,7 +38,7 @@ const AddressForm = ({ defaultValues, onSubmit, onBack }: Props) => {
     formState: { errors, isSubmitting },
   } = useForm<AddressType>({
     resolver: yupResolver(schema),
-    mode:'onTouched',
+    mode: "onTouched",
     defaultValues: {
       province: defaultValues?.province ?? "",
       city: defaultValues?.city ?? "",
