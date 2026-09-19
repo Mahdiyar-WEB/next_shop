@@ -1,4 +1,4 @@
-export interface AddressFormValues {
+export interface AddressType {
   province: string;
   city: string;
   street: string;
