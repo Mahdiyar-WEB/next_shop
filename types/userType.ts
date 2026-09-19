@@ -1,6 +1,6 @@
 type UserRole = "USER";
 
-interface CartProductDetails {
+export interface CartProductDetails {
   productId: {
     _id: string;
     title: string;
