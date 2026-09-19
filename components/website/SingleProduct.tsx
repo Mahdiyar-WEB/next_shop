@@ -15,7 +15,7 @@ import toPersianDigits from "utils/toPersianDigits";
 import formatPrice from "utils/formatPrice";
 import Badge from "components/common/Badge";
 import Link from "next/link";
-import { useAddToCart } from "hooks/use-cart";
+import { useAddToCart, useCart } from "hooks/use-cart";
 
 type Props = {
   product: Product & { isBookmarked: boolean };
@@ -27,6 +27,7 @@ const SingleProduct = ({ product }: Props) => {
   );
   const { mutateAsync: likeProduct } = useLikeProduct();
   const { mutateAsync: addToCart } = useAddToCart();
+  const { data: cartDetails } = useCart();
   const { user, setUser } = useUserStore();
 
   const handleBookmark = () => {
@@ -78,6 +79,10 @@ const SingleProduct = ({ product }: Props) => {
 
   const hasDiscount = !!product.discount;
 
+  const isProductInCart = !!cartDetails?.cart.products.find(
+    (cartProduct) => cartProduct.productId._id === product._id,
+  );
+  
   return (
     <section className="flex">
       <div className="flex flex-col gap-4 mt-5 py-5 px-1.5 border border-l-0 border-gray-300 rounded-r-lg h-fit ">
@@ -261,9 +266,15 @@ const SingleProduct = ({ product }: Props) => {
           </p>
         )}
         {/* add to cart button */}
-        <Button onClick={handleAddToCart} className="mt-auto">
-          افزودن به سبد خرید
-        </Button>
+        {isProductInCart ? (
+          <Link href="/cart" className="mt-auto">
+            <Button className="w-full">ادامه خرید</Button>
+          </Link>
+        ) : (
+          <Button onClick={handleAddToCart} className="mt-auto">
+            افزودن به سبد خرید
+          </Button>
+        )}
       </div>
     </section>
   );
