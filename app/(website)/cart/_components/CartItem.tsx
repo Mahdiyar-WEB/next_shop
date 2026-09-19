@@ -3,14 +3,14 @@
 import Image from "next/image";
 import Link from "next/link";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import type { Product } from "types/productType";
 import formatPrice from "utils/formatPrice";
 import toPersianDigits from "utils/toPersianDigits";
 import { useAddToCart, useRemoveFromCart } from "hooks/use-cart";
 import QuantityCounter from "./QuantityCounter";
+import { CartProductDetails } from "types/userType";
 
 type Props = {
-  product: Product;
+  product: CartProductDetails["productId"];
   quantity: number;
 };
 
@@ -62,9 +62,7 @@ const CartItem = ({ product, quantity }: Props) => {
             }`}
           />
 
-          <span>
-            موجودی: {toPersianDigits(product.countInStock)} عدد
-          </span>
+          <span>موجودی: {toPersianDigits(product.countInStock)} عدد</span>
         </div>
 
         <div className="mt-auto flex flex-wrap items-end justify-between gap-3 pt-4">
@@ -87,9 +85,7 @@ const CartItem = ({ product, quantity }: Props) => {
               <span className="text-sm font-extrabold text-secondary-950 sm:text-base">
                 {formatPrice(product.offPrice)}
               </span>
-              <span className="ms-1 text-[9px] text-secondary-500">
-                تومان
-              </span>
+              <span className="ms-1 text-[9px] text-secondary-500">تومان</span>
             </p>
           </div>
         </div>
