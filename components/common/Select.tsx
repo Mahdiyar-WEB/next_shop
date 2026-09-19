@@ -1,13 +1,23 @@
-import { useState, useRef, useEffect } from "react";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import SortIcon from "@mui/icons-material/Sort";
 
 type Props = {
   options: { value: string; label: string }[];
   onChange: (e: { target: { value: string } }) => void;
   value: string;
+  placeholder?: string;
+  disabled?: boolean;
 };
 
-const Select = ({ value, onChange, options }: Props) => {
+const Select = ({
+  value,
+  onChange,
+  options,
+  placeholder = "انتخاب کنید",
+  disabled = false,
+}: Props) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
@@ -16,10 +26,14 @@ const Select = ({ value, onChange, options }: Props) => {
   useEffect(() => {
     const handler = (e: PointerEvent) => {
       const target = e.target as Node;
-      if (ref.current && target && !ref.current.contains(target))
+
+      if (ref.current && target && !ref.current.contains(target)) {
         setOpen(false);
+      }
     };
+
     document.addEventListener("click", handler);
+
     return () => document.removeEventListener("click", handler);
   }, []);
 
@@ -29,51 +43,59 @@ const Select = ({ value, onChange, options }: Props) => {
   };
 
   return (
-    <div ref={ref} className="relative w-full">
+    <div ref={ref} className="relative h-full w-full">
       <button
         type="button"
+        disabled={disabled}
         onClick={() => setOpen((prev) => !prev)}
-        className="w-full h-full px-3 text-left text-sm rounded-md text-secondary-500 bg-white flex justify-between items-center cursor-pointer"
+        className={`h-full w-full rounded-md bg-white px-3 text-left text-sm text-secondary-500 flex items-center justify-between ${disabled ? "cursor-not-allowed opacity-50" : "cursor-pointer"}`}
       >
-        <span className="flex gap-3 items-center font-medium text-xs md:text-sm">
-          <SortIcon />  
-          {selected?.label}
+        <span className="flex items-center gap-3 text-xs font-medium md:text-sm">
+          <SortIcon />
+
+          <span className={selected ? "text-secondary-500" : "text-secondary-400"}>
+            {selected?.label ?? placeholder}
+          </span>
         </span>
+
         <span
-          className={`${open && "rotate-180"} transition-all duration-200 ease-out`}
+          className={`${open ? "rotate-180" : ""} transition-all duration-200 ease-out`}
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
+            width="16"
+            height="16"
             viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="size-5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
             <path
+              d="M6 9L12 15L18 9"
+              stroke="currentColor"
+              strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="m19.5 8.25-7.5 7.5-7.5-7.5"
             />
           </svg>
         </span>
       </button>
 
-      {open && (
-        <ul className="absolute z-50 mt-2 w-full bg-white rounded-md border border-secondary-200 shadow-2xl max-h-48 overflow-y-auto">
-          {options.map((item) => (
-            <li
-              key={item.value}
-              onClick={() => handleSelect(item.value)}
-              className={`
-                px-3 py-2 text-xs md:text-sm cursor-pointer
-                hover:bg-gray-100 hover:text-primary-900
-                ${item.value === value ? "bg-gray-300/50! text-primary-700 font-medium" : ""}
-              `}
-            >
-              {item.label}
+      {open && !disabled && (
+        <ul className="absolute z-50 mt-2 max-h-60 w-full overflow-y-auto rounded-md border border-secondary-200 bg-white shadow-2xl">
+          {options.length ? (
+            options.map((item) => (
+              <li
+                key={item.value}
+                onClick={() => handleSelect(item.value)}
+                className={`cursor-pointer px-3 py-2 text-xs hover:bg-gray-100 hover:text-primary-900 md:text-sm ${item.value === value ? "bg-gray-300/50! font-medium text-primary-700" : ""}`}
+              >
+                {item.label}
+              </li>
+            ))
+          ) : (
+            <li className="px-3 py-3 text-xs text-secondary-400 md:text-sm">
+              گزینه‌ای وجود ندارد
             </li>
-          ))}
+          )}
         </ul>
       )}
     </div>
