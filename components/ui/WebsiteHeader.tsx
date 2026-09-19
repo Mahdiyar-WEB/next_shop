@@ -14,9 +14,11 @@ import { useUserStore } from "stores/user-store";
 import SearchBox from "../common/SearchBox";
 import { User } from "types/userType";
 import toPersianDigits from "utils/toPersianDigits";
+import { useCart } from "hooks/use-cart";
 
 const RootLayoutHeader = () => {
   const { user, isLoading } = useUserStore();
+  const { data } = useCart();
 
   const [isDesktop, setIsDesktop] = useState(false);
   useEffect(() => {
@@ -26,7 +28,7 @@ const RootLayoutHeader = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const cartItems = user?.cart.products.reduce((accumulator, currentValue) => {
+  const cartItems = data?.cart.products.reduce((accumulator, currentValue) => {
     return currentValue.quantity + accumulator;
   }, 0);
 
@@ -68,7 +70,7 @@ const RootLayoutHeader = () => {
                 <div className="w-6 h-6 border-2 border-primary-200 border-t-primary-600 rounded-full animate-spin" />
               </div>
             ) : user ? (
-              <ProfileMenu user={user} />
+              <ProfileMenu />
             ) : (
               <Link
                 href="/login"
@@ -96,7 +98,7 @@ const RootLayoutHeader = () => {
   );
 };
 
-const ProfileMenu = ({ user }: { user: User }) => {
+const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
