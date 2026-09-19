@@ -23,9 +23,7 @@ const CouponForm = () => {
           <div className="flex min-w-0 items-center gap-2 text-xs text-emerald-700">
             <LocalOfferOutlinedIcon className="text-base" />
 
-            <span className="truncate">
-              کد تخفیف: {coupon}
-            </span>
+            <span className="truncate">کد تخفیف: {coupon}</span>
           </div>
 
           <button
@@ -76,4 +74,4 @@ const CouponForm = () => {
   );
 };
 
-export default CouponForm;  
+export default CouponForm;
