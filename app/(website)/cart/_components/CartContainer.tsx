@@ -4,11 +4,13 @@ import { useState } from "react";
 import { useCart } from "hooks/use-cart";
 import CartStep from "./CartStep";
 import CartStepper from "./CartStepper";
+import { AddressType } from "types/addressType";
 
 export type CartStepNumber = 1 | 2 | 3 | 4;
 
 const CartContainer = () => {
   const [step, setStep] = useState<CartStepNumber>(1);
+  const [address, setAddress] = useState<AddressType | null>(null);
 
   const { data, isLoading, isError } = useCart();
 
@@ -37,8 +39,17 @@ const CartContainer = () => {
       <CartStep
         step={step}
         products={products}
-        onNext={() => setStep((current) => Math.min(current + 1, 4) as CartStepNumber)}
-        onBack={() => setStep((current) => Math.max(current - 1, 1) as CartStepNumber)}
+        address={address}
+        onAddressSubmit={(values) => {
+          setAddress(values);
+          setStep(3);
+        }}
+        onNext={() =>
+          setStep((current) => Math.min(current + 1, 4) as CartStepNumber)
+        }
+        onBack={() =>
+          setStep((current) => Math.max(current - 1, 1) as CartStepNumber)
+        }
       />
     </div>
   );
