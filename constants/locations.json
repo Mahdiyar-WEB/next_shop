@@ -1,0 +1,349 @@
+[
+  {
+    "id": "tehran",
+    "name": "تهران",
+    "cities": [
+      { "id": "tehran", "name": "تهران" },
+      { "id": "eslamshahr", "name": "اسلامشهر" },
+      { "id": "shahriar", "name": "شهریار" },
+      { "id": "shahr-e-qods", "name": "قدس" },
+      { "id": "malard", "name": "ملارد" },
+      { "id": "robat-karim", "name": "رباط کریم" },
+      { "id": "pakdasht", "name": "پاکدشت" },
+      { "id": "varamin", "name": "ورامین" },
+      { "id": "rey", "name": "ری" },
+      { "id": "damavand", "name": "دماوند" },
+      { "id": "firuzkuh", "name": "فیروزکوه" },
+      { "id": "pardis", "name": "پردیس" },
+      { "id": "lavasan", "name": "لواسان" }
+    ]
+  },
+  {
+    "id": "razavi-khorasan",
+    "name": "خراسان رضوی",
+    "cities": [
+      { "id": "mashhad", "name": "مشهد" },
+      { "id": "nishapur", "name": "نیشابور" },
+      { "id": "sabzevar", "name": "سبزوار" },
+      { "id": "torbat-heydarieh", "name": "تربت حیدریه" },
+      { "id": "kashmar", "name": "کاشمر" },
+      { "id": "quchan", "name": "قوچان" },
+      { "id": "torbat-jam", "name": "تربت جام" },
+      { "id": "taybad", "name": "تایباد" },
+      { "id": "chenaran", "name": "چناران" },
+      { "id": "sarakhs", "name": "سرخس" },
+      { "id": "gonabad", "name": "گناباد" },
+      { "id": "fariman", "name": "فریمان" },
+      { "id": "khaf", "name": "خواف" },
+      { "id": "bardaskan", "name": "بردسکن" },
+      { "id": "darrehgaz", "name": "درگز" },
+      { "id": "kalat", "name": "کلات" },
+      { "id": "feyzabad", "name": "فیض‌آباد" },
+      { "id": "golbahar", "name": "گلبهار" },
+      { "id": "torqabeh", "name": "طرقبه" },
+      { "id": "shandiz", "name": "شاندیز" },
+      { "id": "rashtkhar", "name": "رشتخوار" },
+      { "id": "joghatai", "name": "جغتای" },
+      { "id": "bajestan", "name": "بجستان" },
+      { "id": "khلیلabad", "name": "خلیل‌آباد" }
+    ]
+  },
+  {
+    "id": "north-khorasan",
+    "name": "خراسان شمالی",
+    "cities": [
+      { "id": "bojnurd", "name": "بجنورد" },
+      { "id": "shirvan", "name": "شیروان" },
+      { "id": "esfarayen", "name": "اسفراین" },
+      { "id": "faruj", "name": "فاروج" },
+      { "id": "jajarm", "name": "جاجرم" },
+      { "id": "garmeh", "name": "گرمه" },
+      { "id": "ashkhaneh", "name": "آشخانه" },
+      { "id": "maneh", "name": "مانه" },
+      { "id": "samalqan", "name": "سملقان" }
+    ]
+  },
+  {
+    "id": "south-khorasan",
+    "name": "خراسان جنوبی",
+    "cities": [
+      { "id": "birjand", "name": "بیرجند" },
+      { "id": "ghaein", "name": "قائن" },
+      { "id": "tabas", "name": "طبس" },
+      { "id": "ferdows", "name": "فردوس" },
+      { "id": "nehbandan", "name": "نهبندان" },
+      { "id": "sarayan", "name": "سرایان" },
+      { "id": "sarbisheh", "name": "سربیشه" },
+      { "id": "boshruyeh", "name": "بشرویه" },
+      { "id": "khusf", "name": "خوسف" },
+      { "id": "darmian", "name": "درمیان" },
+      { "id": "zirkuh", "name": "زیرکوه" }
+    ]
+  },
+  {
+    "id": "isfahan",
+    "name": "اصفهان",
+    "cities": [
+      { "id": "isfahan", "name": "اصفهان" },
+      { "id": "kashan", "name": "کاشان" },
+      { "id": "najafabad", "name": "نجف‌آباد" },
+      { "id": "khomeinishahr", "name": "خمینی‌شهر" },
+      { "id": "shahinshahr", "name": "شاهین‌شهر" },
+      { "id": "falavarjan", "name": "فلاورجان" },
+      { "id": "mobarakeh", "name": "مبارکه" },
+      { "id": "dehaghan", "name": "دهاقان" }
+    ]
+  },
+  {
+    "id": "east-azerbaijan",
+    "name": "آذربایجان شرقی",
+    "cities": [
+      { "id": "tabriz", "name": "تبریز" },
+      { "id": "maragheh", "name": "مراغه" },
+      { "id": "marand", "name": "مرند" },
+      { "id": "ahar", "name": "اهر" },
+      { "id": "bonab", "name": "بناب" },
+      { "id": "miyaneh", "name": "میانه" },
+      { "id": "jolfa", "name": "جلفا" },
+      { "id": "sahand", "name": "سهند" }
+    ]
+  },
+  {
+    "id": "west-azerbaijan",
+    "name": "آذربایجان غربی",
+    "cities": [
+      { "id": "urmia", "name": "ارومیه" },
+      { "id": "khoy", "name": "خوی" },
+      { "id": "bukan", "name": "بوکان" },
+      { "id": "mahabad", "name": "مهاباد" },
+      { "id": "miandoab", "name": "میاندوآب" },
+      { "id": "piranshahr", "name": "پیرانشهر" },
+      { "id": "salmas", "name": "سلماس" },
+      { "id": "naghadeh", "name": "نقده" }
+    ]
+  },
+  {
+    "id": "alborz",
+    "name": "البرز",
+    "cities": [
+      { "id": "karaj", "name": "کرج" },
+      { "id": "fardis", "name": "فردیس" },
+      { "id": "nazarabad", "name": "نظرآباد" },
+      { "id": "hashtgerd", "name": "هشتگرد" },
+      { "id": "mahdasht", "name": "ماهدشت" },
+      { "id": "shahriar", "name": "شهر جدید هشتگرد" }
+    ]
+  },
+  {
+    "id": "fars",
+    "name": "فارس",
+    "cities": [
+      { "id": "shiraz", "name": "شیراز" },
+      { "id": "marvdasht", "name": "مرودشت" },
+      { "id": "jahrom", "name": "جهرم" },
+      { "id": "fasa", "name": "فسا" },
+      { "id": "lar", "name": "لار" },
+      { "id": "kazerun", "name": "کازرون" },
+      { "id": "darab", "name": "داراب" },
+      { "id": "abadeh", "name": "آباده" }
+    ]
+  },
+  {
+    "id": "khuzestan",
+    "name": "خوزستان",
+    "cities": [
+      { "id": "ahvaz", "name": "اهواز" },
+      { "id": "dezful", "name": "دزفول" },
+      { "id": "abadan", "name": "آبادان" },
+      { "id": "khorramshahr", "name": "خرمشهر" },
+      { "id": "bandar-mahshahr", "name": "بندر ماهشهر" },
+      { "id": "shushtar", "name": "شوشتر" },
+      { "id": "behbahan", "name": "بهبهان" },
+      { "id": "susangerd", "name": "سوسنگرد" }
+    ]
+  },
+  {
+    "id": "mazandaran",
+    "name": "مازندران",
+    "cities": [
+      { "id": "sari", "name": "ساری" },
+      { "id": "babol", "name": "بابل" },
+      { "id": "amol", "name": "آمل" },
+      { "id": "qaemshahr", "name": "قائم‌شهر" },
+      { "id": "nowshahr", "name": "نوشهر" },
+      { "id": "chalous", "name": "چالوس" },
+      { "id": "behshahr", "name": "بهشهر" },
+      { "id": "tonkabon", "name": "تنکابن" }
+    ]
+  },
+  {
+    "id": "gilan",
+    "name": "گیلان",
+    "cities": [
+      { "id": "rasht", "name": "رشت" },
+      { "id": "bandar-anzali", "name": "بندر انزلی" },
+      { "id": "lahijan", "name": "لاهیجان" },
+      { "id": "langarud", "name": "لنگرود" },
+      { "id": "talesh", "name": "تالش" },
+      { "id": "astara", "name": "آستارا" },
+      { "id": "rudسر", "name": "رودسر" },
+      { "id": "fuman", "name": "فومن" }
+    ]
+  },
+  {
+    "id": "kerman",
+    "name": "کرمان",
+    "cities": [
+      { "id": "kerman", "name": "کرمان" },
+      { "id": "sirjan", "name": "سیرجان" },
+      { "id": "rafsanjan", "name": "رفسنجان" },
+      { "id": "jiroft", "name": "جیرفت" },
+      { "id": "bam", "name": "بم" },
+      { "id": "shahdad", "name": "شهداد" },
+      { "id": "zarand", "name": "زرند" }
+    ]
+  },
+  {
+    "id": "kermanshah",
+    "name": "کرمانشاه",
+    "cities": [
+      { "id": "kermanshah", "name": "کرمانشاه" },
+      { "id": "islamabad-gharb", "name": "اسلام‌آباد غرب" },
+      { "id": "javanrud", "name": "جوانرود" },
+      { "id": "kangavar", "name": "کنگاور" },
+      { "id": "sahneh", "name": "صحنه" },
+      { "id": "paveh", "name": "پاوه" }
+    ]
+  },
+  {
+    "id": "hamadan",
+    "name": "همدان",
+    "cities": [
+      { "id": "hamadan", "name": "همدان" },
+      { "id": "malayer", "name": "ملایر" },
+      { "id": "nahavand", "name": "نهاوند" },
+      { "id": "asadabad", "name": "اسدآباد" },
+      { "id": "toysركان", "name": "تویسرکان" }
+    ]
+  },
+  {
+    "id": "qom",
+    "name": "قم",
+    "cities": [{ "id": "qom", "name": "قم" }]
+  },
+  {
+    "id": "qazvin",
+    "name": "قزوین",
+    "cities": [
+      { "id": "qazvin", "name": "قزوین" },
+      { "id": "takestan", "name": "تاکستان" },
+      { "id": "alvand", "name": "الوند" },
+      { "id": "abyek", "name": "آبیک" }
+    ]
+  },
+  {
+    "id": "zanjan",
+    "name": "زنجان",
+    "cities": [
+      { "id": "zanjan", "name": "زنجان" },
+      { "id": "abhar", "name": "ابهر" },
+      { "id": "khorramdareh", "name": "خرمدره" },
+      { "id": "hidaj", "name": "هیدج" }
+    ]
+  },
+  {
+    "id": "yazd",
+    "name": "یزد",
+    "cities": [
+      { "id": "yazd", "name": "یزد" },
+      { "id": "meybod", "name": "میبد" },
+      { "id": "ardakan", "name": "اردکان" },
+      { "id": "taft", "name": "تفت" },
+      { "id": "mehriz", "name": "مهریز" }
+    ]
+  },
+  {
+    "id": "hormozgan",
+    "name": "هرمزگان",
+    "cities": [
+      { "id": "bandar-abbas", "name": "بندرعباس" },
+      { "id": "minab", "name": "میناب" },
+      { "id": "qeshm", "name": "قشم" },
+      { "id": "kish", "name": "کیش" },
+      { "id": "bandar-lengeh", "name": "بندر لنگه" },
+      { "id": "rudan", "name": "رودان" }
+    ]
+  },
+  {
+    "id": "sistan-baluchestan",
+    "name": "سیستان و بلوچستان",
+    "cities": [
+      { "id": "zahedan", "name": "زاهدان" },
+      { "id": "zabol", "name": "زابل" },
+      { "id": "chabahar", "name": "چابهار" },
+      { "id": "iranshahr", "name": "ایرانشهر" },
+      { "id": "saravan", "name": "سراوان" },
+      { "id": "khash", "name": "خاش" },
+      { "id": "nikshahr", "name": "نیک‌شهر" }
+    ]
+  },
+  {
+    "id": "golestan",
+    "name": "گلستان",
+    "cities": [
+      { "id": "gorgan", "name": "گرگان" },
+      { "id": "gonbad-kavus", "name": "گنبد کاووس" },
+      { "id": "bandar-torkaman", "name": "بندر ترکمن" },
+      { "id": "aliabad-katul", "name": "علی‌آباد کتول" },
+      { "id": "azadshahr", "name": "آزادشهر" },
+      { "id": "kordkuy", "name": "کردکوی" }
+    ]
+  },
+  {
+    "id": "lorestan",
+    "name": "لرستان",
+    "cities": [
+      { "id": "khorramabad", "name": "خرم‌آباد" },
+      { "id": "borujerd", "name": "بروجرد" },
+      { "id": "dorud", "name": "دورود" },
+      { "id": "aligdarz", "name": "الیگودرز" },
+      { "id": "kuhdasht", "name": "کوهدشت" },
+      { "id": "azna", "name": "ازنا" }
+    ]
+  },
+  {
+    "id": "ardebil",
+    "name": "اردبیل",
+    "cities": [
+      { "id": "ardebil", "name": "اردبیل" },
+      { "id": "parsabad", "name": "پارس‌آباد" },
+      { "id": "meshginshahr", "name": "مشگین‌شهر" },
+      { "id": "khalkhal", "name": "خلخال" },
+      { "id": "germi", "name": "گرمی" }
+    ]
+  },
+  {
+    "id": "kurdistan",
+    "name": "کردستان",
+    "cities": [
+      { "id": "sanandaj", "name": "سنندج" },
+      { "id": "saghez", "name": "سقز" },
+      { "id": "marivan", "name": "مریوان" },
+      { "id": "baneh", "name": "بانه" },
+      { "id": "bijar", "name": "بیجار" },
+      { "id": "qorveh", "name": "قروه" }
+    ]
+  },
+  {
+    "id": "markazi",
+    "name": "مرکزی",
+    "cities": [
+      { "id": "arak", "name": "اراک" },
+      { "id": "saveh", "name": "ساوه" },
+      { "id": "khomein", "name": "خمین" },
+      { "id": "mahalat", "name": "محلات" },
+      { "id": "delijan", "name": "دلیجان" },
+      { "id": "zarandieh", "name": "مأمونیه" }
+    ]
+  }
+]
