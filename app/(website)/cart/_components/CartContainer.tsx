@@ -5,14 +5,36 @@ import { useCart } from "hooks/use-cart";
 import CartStep from "./CartStep";
 import CartStepper from "./CartStepper";
 import { AddressType } from "types/addressType";
+import { useCheckout } from "hooks/use-payment";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 export type CartStepNumber = 1 | 2 | 3 | 4;
 
 const CartContainer = () => {
   const [step, setStep] = useState<CartStepNumber>(1);
   const [address, setAddress] = useState<AddressType | null>(null);
+  const router = useRouter();
 
   const { data, isLoading, isError } = useCart();
+  const { mutateAsync: checkout } = useCheckout();
+
+  const handleSubmit = () => {
+    if (!!address) {
+      checkout(address, {
+        onSuccess: (data) => {
+          toast.success(data.message);
+          setStep(4);
+          setTimeout(() => {
+            router.replace("/dashboard");
+          }, 3000);
+        },
+        onError: (error) => {
+          toast.error(error.message);
+        },
+      });
+    }
+  };
 
   if (isLoading) {
     return (
@@ -50,6 +72,7 @@ const CartContainer = () => {
         onBack={() =>
           setStep((current) => Math.max(current - 1, 1) as CartStepNumber)
         }
+        submitPayment={handleSubmit}
       />
     </div>
   );
