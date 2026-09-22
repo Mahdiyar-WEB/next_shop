@@ -8,6 +8,7 @@ import AddressStep from "./AddressStep";
 import { AddressType } from "types/addressType";
 import { CartProductDetails } from "types/userType";
 import Button from "components/common/Button";
+import toPersianDigits from "utils/toPersianDigits";
 
 type Props = {
   step: CartStepNumber;
@@ -16,6 +17,7 @@ type Props = {
   onAddressSubmit: (values: AddressType) => void;
   onNext: () => void;
   onBack: () => void;
+  submitPayment: () => void;
 };
 
 const CartStep = ({
@@ -25,6 +27,7 @@ const CartStep = ({
   onAddressSubmit,
   onNext,
   onBack,
+  submitPayment
 }: Props) => {
   if (step === 1) {
     if (!products.length) {
@@ -41,7 +44,7 @@ const CartStep = ({
               </h1>
 
               <span className="text-xs text-secondary-500 sm:text-sm">
-                {products.length} کالا
+                {toPersianDigits(products.length)} کالا
               </span>
             </div>
           </div>
@@ -89,7 +92,7 @@ const CartStep = ({
             بازگشت
           </Button>
 
-          <Button type="button" onClick={onNext}>
+          <Button type="button" onClick={submitPayment}>
             ثبت سفارش
           </Button>
         </div>
