@@ -158,11 +158,24 @@ const couponSchema = new Schema(
   },
   { timestamps: true },
 );
+
+const addressSchema = new Schema(
+  {
+    province: { type: String, required: true },
+    city: { type: String, required: true },
+    street: { type: String, required: true },
+    plaque: { type: String, required: true },
+    unit: { type: String, required: true },
+  },
+  { _id: false },
+);
+
 const paymentSchema = new Schema(
   {
     invoiceNumber: { type: String, unique: true },
     paymentMethod: { type: String, default: "ZARINPAL" },
     amount: Number,
+    address: addressSchema,
     description: String,
     refId: String,
     cardHash: String,
