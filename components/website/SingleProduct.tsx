@@ -82,7 +82,7 @@ const SingleProduct = ({ product }: Props) => {
   const isProductInCart = !!cartDetails?.cart.products.find(
     (cartProduct) => cartProduct.productId._id === product._id,
   );
-  
+
   return (
     <section className="flex">
       <div className="flex flex-col gap-4 mt-5 py-5 px-1.5 border border-l-0 border-gray-300 rounded-r-lg h-fit ">
@@ -258,7 +258,7 @@ const SingleProduct = ({ product }: Props) => {
           </p>
         </div>
         {/* count in stock message */}
-        {product.countInStock < 3 && (
+        {product.countInStock < 3 && product.countInStock > 0 && (
           <p className="flex gap-x-1 text-sm text-error font-medium">
             <span>🔥تنها</span>
             <span>{toPersianDigits(product.countInStock)}</span>
@@ -266,7 +266,11 @@ const SingleProduct = ({ product }: Props) => {
           </p>
         )}
         {/* add to cart button */}
-        {isProductInCart ? (
+        {product.countInStock === 0 ? (
+          <Button disabled className="w-full">
+            اتمام موجودی
+          </Button>
+        ) : isProductInCart ? (
           <Link href="/cart" className="mt-auto">
             <Button className="w-full">ادامه خرید</Button>
           </Link>
