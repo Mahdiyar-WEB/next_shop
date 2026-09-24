@@ -20,11 +20,13 @@ const ProductCard = ({ product, variant = "slider" }: Props) => {
     <Link
       href={`/product/${product.slug}`}
       draggable={false}
-      className={`group flex h-full flex-col overflow-hidden bg-white transition-all duration-300 ${
-        isGrid
-          ? "w-full"
-          : "w-43 shrink-0 rounded-2xl border border-secondary-100 sm:w-50 md:w-55 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)]"
-      }`}
+      className={`group flex h-full flex-col overflow-hidden transition-all duration-300
+        ${product.countInStock === 0 ? "bg-gray-100" : "bg-white"}
+        ${
+          isGrid
+            ? "w-full"
+            : "w-43 shrink-0 rounded-2xl border border-secondary-100 sm:w-50 md:w-55 hover:-translate-y-1 hover:border-primary-200 hover:shadow-[0_8px_30px_rgba(0,0,0,0.07)]"
+        }`}
     >
       {/* Product Image */}
       <div

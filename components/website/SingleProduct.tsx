@@ -267,7 +267,7 @@ const SingleProduct = ({ product }: Props) => {
         )}
         {/* add to cart button */}
         {product.countInStock === 0 ? (
-          <Button disabled className="w-full">
+          <Button disabled variant="outline" className="w-full pointer-events-none">
             اتمام موجودی
           </Button>
         ) : isProductInCart ? (
