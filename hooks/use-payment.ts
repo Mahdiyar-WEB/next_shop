@@ -1,4 +1,4 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { paymentServices } from "services/payment-services";
 import { queryKeys } from "./query-keys";
@@ -14,5 +14,12 @@ export function useCheckout() {
         queryKey: queryKeys.cart,
       });
     },
+  });
+}
+
+export function usePayments(query = "") {
+  return useQuery({
+    queryKey: queryKeys.payments(query),
+    queryFn: () => paymentServices.getPayments(query),
   });
 }
