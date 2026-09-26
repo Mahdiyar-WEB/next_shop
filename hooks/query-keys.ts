@@ -1,6 +1,7 @@
 export const queryKeys = {
   categories: (query = "") => ["categories", query] as const,
   products: (query = "") => ["products", query] as const,
+  payments: (query = "") => ["payments", query] as const,
   posts: (query = "") => ["posts", query] as const,
   post: (slug: string) => ["posts", slug] as const,
   comments: (query = "") => ["comments", query] as const,
