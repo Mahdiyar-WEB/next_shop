@@ -21,6 +21,10 @@ export const productServices = {
       product: Product & { isBookmarked: boolean };
       similarProducts: Product[];
     }>(`/api/products/slug/${slug}`),
+  getById: (id: string) =>
+    apiClient.get<{
+      product: Product;
+    }>(`/api/products/${id}`),
   like: (id: string) =>
     apiClient.post<{ isLiked: boolean; message: string }>(
       `/api/products/${id}/like`,
