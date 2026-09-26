@@ -26,7 +26,7 @@ const CartContainer = () => {
           toast.success(data.message);
           setStep(4);
           setTimeout(() => {
-            router.replace("/dashboard");
+            router.replace("/dashboard/orders");
           }, 3000);
         },
         onError: (error) => {
