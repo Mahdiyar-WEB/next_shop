@@ -16,6 +16,13 @@ export function useProduct(slug: string) {
     enabled: Boolean(slug),
   });
 }
+export function useProductById(id: string) {
+  return useQuery({
+    queryKey: ["products", id],
+    queryFn: () => productServices.getById(id),
+    enabled: Boolean(id),
+  });
+}
 export function useLikeProduct() {
   const client = useQueryClient();
   return useMutation({
