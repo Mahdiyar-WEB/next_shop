@@ -9,9 +9,13 @@ export function useCheckout() {
   return useMutation({
     mutationFn: paymentServices.checkout,
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: queryKeys.cart,
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({
+        queryKey: ["cart"],
+      });
+
+      await queryClient.invalidateQueries({
+        queryKey: ["payments"],
       });
     },
   });
