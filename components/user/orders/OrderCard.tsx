@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-
+import locationsData from "constants/locations.json";
 import Badge from "components/common/Badge";
 import Button from "components/common/Button";
 import toPersianDigits from "utils/toPersianDigits";
@@ -37,7 +37,6 @@ const formatDate = (date: string) => {
 };
 
 const OrderCard = ({ payment }: Props) => {
-  console.log("🚀 ~ OrderCard ~ payment:", payment.address);
   const [isExpanded, setIsExpanded] = useState(false);
 
   const statusTitle = paymentStatusMap[payment.status] || payment.status;
@@ -48,6 +47,12 @@ const OrderCard = ({ payment }: Props) => {
   const productsCount = payment.cart.products.reduce(
     (total, product) => total + product.quantity,
     0,
+  );
+  const province = locationsData.find(
+    (location) => location.id === payment.address?.province,
+  );
+  const city = province?.cities.find(
+    (city) => city.id === payment.address.city,
   );
 
   return (
@@ -115,7 +120,7 @@ const OrderCard = ({ payment }: Props) => {
         </div>
 
         {/* Summary */}
-        <div className="mt-5 grid grid-cols-2 gap-3 rounded-2xl bg-secondary-50 p-3 sm:grid-cols-4 sm:p-4">
+        <div className="mt-5 grid grid-cols-2 gap-3 rounded-2xl bg-blue-100 p-3 sm:grid-cols-4 sm:p-4">
           <div>
             <div className="text-xs text-secondary-400">شماره سفارش</div>
 
@@ -159,7 +164,7 @@ const OrderCard = ({ payment }: Props) => {
 
           <Button
             variant="outline"
-            className="h-10 rounded-2xl px-4 text-sm"
+            className="h-10 rounded-2xl px-4 text-sm flex"
             onClick={() => setIsExpanded((prev) => !prev)}
             aria-expanded={isExpanded}
           >
@@ -192,7 +197,7 @@ const OrderCard = ({ payment }: Props) => {
         }`}
       >
         <div className="min-h-0 overflow-hidden">
-          <div className="border-t border-secondary-100 bg-secondary-50/70 p-4 sm:p-5">
+          <div className="border-t border-secondary-100 bg-blue-100 p-4 sm:p-5">
             <div className="mb-4 flex items-center gap-2">
               <div className="flex size-9 items-center justify-center rounded-xl bg-white text-primary-800 shadow-sm">
                 <svg
@@ -232,7 +237,7 @@ const OrderCard = ({ payment }: Props) => {
                 <div className="text-xs text-secondary-400">استان</div>
 
                 <div className="mt-1 text-sm font-medium text-secondary-800">
-                  {payment.address?.province}
+                  {province?.name}
                 </div>
               </div>
 
@@ -240,7 +245,7 @@ const OrderCard = ({ payment }: Props) => {
                 <div className="text-xs text-secondary-400">شهر</div>
 
                 <div className="mt-1 text-sm font-medium text-secondary-800">
-                  {payment.address?.city}
+                  {city?.name}
                 </div>
               </div>
 
