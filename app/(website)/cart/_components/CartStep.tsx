@@ -9,6 +9,7 @@ import { AddressType } from "types/addressType";
 import { CartProductDetails } from "types/userType";
 import Button from "components/common/Button";
 import toPersianDigits from "utils/toPersianDigits";
+import Image from "next/image";
 
 type Props = {
   step: CartStepNumber;
@@ -27,7 +28,7 @@ const CartStep = ({
   onAddressSubmit,
   onNext,
   onBack,
-  submitPayment
+  submitPayment,
 }: Props) => {
   if (step === 1) {
     if (!products.length) {
@@ -101,6 +102,9 @@ const CartStep = ({
   }
   return (
     <section className="rounded-2xl border border-secondary-100 bg-white p-10 text-center">
+      <div className="relative w-32 h-32 mx-auto aspect-video mb-5">
+        <Image src="/success.gif" alt="success gif" fill />
+      </div>
       <h2 className="text-xl font-bold text-primary-900">
         سفارش با موفقیت ثبت شد
       </h2>
