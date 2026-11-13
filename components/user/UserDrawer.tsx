@@ -30,7 +30,7 @@ const DrawerLinks = [
   {
     id: 4,
     title: "علاقه‌مندی‌ ها",
-    href: "/profile/categories",
+    href: "/dashboard/bookmarks",
     icon: <BookmarkBorderOutlinedIcon />,
   },
 ];
