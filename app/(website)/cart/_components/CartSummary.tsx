@@ -64,9 +64,7 @@ const CartSummary = ({ onNext }: Props) => {
           )}
         </div>
 
-        <div className="my-5 border-t border-dashed border-secondary-200" />
 
-        <CouponForm />
 
         <div className="my-5 border-t border-secondary-200" />
 
